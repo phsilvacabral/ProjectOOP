@@ -1,35 +1,24 @@
 package PJBL;
 
-public class Carro extends Veiculo{
-    private String tipoCarroceria;
+public abstract class Carro extends Terrestre {
     private int numAssento;
     private int numPorta;
     private int capacidadePortaMala;
     private String motor;
-    private int potenciaMotor;
     private String combustivel;
     private String cambio;
 
-    public Carro(int codVeiculo, String tipo, String marca, String modelo, int ano, int quilometragem, String cor,
-                 String placa, double preco, int quantidade, String tipoCarroceria, int numAssento, int numPorta,
-                 int capacidadePortaMala, String motor, int potenciaMotor, String combustivel, String cambio) {
-        super(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor, placa, preco, quantidade);
-        this.tipoCarroceria = tipoCarroceria;
+    public Carro(int codVeiculo, String tipo, String marca, String modelo, int ano, int quilometragem,
+                 String cor, String placa, double preco, int quantidade, String tipoCarroceria,
+                 int potenciaMotor, String motor, String combustivel, String cambio,
+                 int numAssento, int numPorta, int capacidadePortaMala) {
+        super(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor, placa, preco, quantidade, tipoCarroceria, potenciaMotor);
         this.numAssento = numAssento;
         this.numPorta = numPorta;
         this.capacidadePortaMala = capacidadePortaMala;
         this.motor = motor;
-        this.potenciaMotor = potenciaMotor;
         this.combustivel = combustivel;
         this.cambio = cambio;
-    }
-
-    public String getTipoCarroceria() {
-        return tipoCarroceria;
-    }
-
-    public void setTipoCarroceria(String tipoCarroceria) {
-        this.tipoCarroceria = tipoCarroceria;
     }
 
     public int getNumAssento() {
@@ -64,14 +53,6 @@ public class Carro extends Veiculo{
         this.motor = motor;
     }
 
-    public int getPotenciaMotor() {
-        return potenciaMotor;
-    }
-
-    public void setPotenciaMotor(int potenciaMotor) {
-        this.potenciaMotor = potenciaMotor;
-    }
-
     public String getCombustivel() {
         return combustivel;
     }
@@ -86,5 +67,32 @@ public class Carro extends Veiculo{
 
     public void setCambio(String cambio) {
         this.cambio = cambio;
+    }
+
+    public void exibirInformacoesCarro() {
+        System.out.println("Tipo de Carroceria: " + getTipoCarroceria());
+        System.out.println("Número de Assentos: " + numAssento);
+        System.out.println("Número de Portas: " + numPorta);
+        System.out.println("Capacidade do Porta-Malas: " + capacidadePortaMala);
+        System.out.println("Motor: " + motor);
+        System.out.println("Combustível: " + combustivel);
+        System.out.println("Câmbio: " + cambio);
+    }
+
+    public abstract void exibirInformacoesEspecificas();
+
+    public static void main(String[] args) {
+        Carro meuCarro = new Carro(1, "Carro", "Marca", "Modelo", 2024, 0, "Cor", "Placa",
+                0.0, 0, "Tipo Carroceria", 0, "Motor", "Combustível", "Câmbio",
+                5, 4, 500) {
+            @Override
+            public void exibirInformacoesEspecificas() {
+                System.out.println("Informações específicas do carro...");
+            }
+        };
+
+        System.out.println("Informações do Carro:");
+        meuCarro.exibirInformacoesCarro();
+        meuCarro.exibirInformacoesEspecificas();
     }
 }
