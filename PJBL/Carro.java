@@ -1,40 +1,53 @@
 package PJBL;
 
-public abstract class Carro extends Terrestre {
-    private int numAssento;
-    private int numPorta;
+public class Carro extends Terrestre {
+    private String tipoCarroceria;
+    private int numAssentos;
+    private int numPortas;
     private int capacidadePortaMala;
     private String motor;
+    private int potenciaMotor;
     private String combustivel;
     private String cambio;
 
-    public Carro(int codVeiculo, String tipo, String marca, String modelo, int ano, int quilometragem,
-                 String cor, String placa, double preco, int quantidade, String tipoCarroceria,
-                 int potenciaMotor, String motor, String combustivel, String cambio,
-                 int numAssento, int numPorta, int capacidadePortaMala) {
-        super(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor, placa, preco, quantidade, tipoCarroceria, potenciaMotor);
-        this.numAssento = numAssento;
-        this.numPorta = numPorta;
+    public Carro(int codVeiculo, String tipo, String marca, String modelo, int ano, int quilometragem, String cor,
+                 int capacidadeDePassageiro, double preco, int quantidade, int numRodas, String tipoCarroceria,
+                 int numAssentos, int numPortas, int capacidadePortaMala, String motor, int potenciaMotor,
+                 String combustivel, String cambio) {
+        super(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor, capacidadeDePassageiro, preco, quantidade,
+                numRodas);
+        this.tipoCarroceria = tipoCarroceria;
+        this.numAssentos = numAssentos;
+        this.numPortas = numPortas;
         this.capacidadePortaMala = capacidadePortaMala;
         this.motor = motor;
+        this.potenciaMotor = potenciaMotor;
         this.combustivel = combustivel;
         this.cambio = cambio;
     }
 
-    public int getNumAssento() {
-        return numAssento;
+    public String getTipoCarroceria() {
+        return tipoCarroceria;
     }
 
-    public void setNumAssento(int numAssento) {
-        this.numAssento = numAssento;
+    public void setTipoCarroceria(String tipoCarroceria) {
+        this.tipoCarroceria = tipoCarroceria;
     }
 
-    public int getNumPorta() {
-        return numPorta;
+    public int getNumAssentos() {
+        return numAssentos;
     }
 
-    public void setNumPorta(int numPorta) {
-        this.numPorta = numPorta;
+    public void setNumAssentos(int numAssentos) {
+        this.numAssentos = numAssentos;
+    }
+
+    public int getNumPortas() {
+        return numPortas;
+    }
+
+    public void setNumPortas(int numPortas) {
+        this.numPortas = numPortas;
     }
 
     public int getCapacidadePortaMala() {
@@ -53,6 +66,14 @@ public abstract class Carro extends Terrestre {
         this.motor = motor;
     }
 
+    public int getPotenciaMotor() {
+        return potenciaMotor;
+    }
+
+    public void setPotenciaMotor(int potenciaMotor) {
+        this.potenciaMotor = potenciaMotor;
+    }
+
     public String getCombustivel() {
         return combustivel;
     }
@@ -67,32 +88,5 @@ public abstract class Carro extends Terrestre {
 
     public void setCambio(String cambio) {
         this.cambio = cambio;
-    }
-
-    public void exibirInformacoesCarro() {
-        System.out.println("Tipo de Carroceria: " + getTipoCarroceria());
-        System.out.println("Número de Assentos: " + numAssento);
-        System.out.println("Número de Portas: " + numPorta);
-        System.out.println("Capacidade do Porta-Malas: " + capacidadePortaMala);
-        System.out.println("Motor: " + motor);
-        System.out.println("Combustível: " + combustivel);
-        System.out.println("Câmbio: " + cambio);
-    }
-
-    public abstract void exibirInformacoesEspecificas();
-
-    public static void main(String[] args) {
-        Carro meuCarro = new Carro(1, "Carro", "Marca", "Modelo", 2024, 0, "Cor", "Placa",
-                0.0, 0, "Tipo Carroceria", 0, "Motor", "Combustível", "Câmbio",
-                5, 4, 500) {
-            @Override
-            public void exibirInformacoesEspecificas() {
-                System.out.println("Informações específicas do carro...");
-            }
-        };
-
-        System.out.println("Informações do Carro:");
-        meuCarro.exibirInformacoesCarro();
-        meuCarro.exibirInformacoesEspecificas();
     }
 }
