@@ -1,5 +1,4 @@
 package PJBL;
-
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,6 +24,55 @@ public abstract class Usuario {
         this.endereco = endereco;
     }
 
+    // Método para formatar os dados do usuário como uma linha de texto separada por virgula
+    public String toFileString() {
+        return String.join(",", String.valueOf(idUsuario), nome, tipo, cpf, email, senha, telefone,
+                endereco);
+    }
+
+    // Método para criar um usuário a partir de uma linha de texto
+    //Recebe dados de um usuário delimitados por virgula
+    public static Usuario fromFileString(String fileString) throws LoginException {
+        // Verifica se a string de entrada é nula ou vazia
+        if (fileString == null || fileString.isEmpty()) {
+            throw new LoginException("A string de entrada está nula ou vazia.");
+        }
+        // Separa cada parte dos dados e coloca num array
+        String[] parts = fileString.split(",");
+        // Verifica se todas as partes necessárias estão presentes
+        if (parts.length != 8) {
+            throw new LoginException("A string de entrada não contém todas as partes necessárias.");
+        }
+        try {
+            int id = Integer.parseInt(parts[0]);
+            String nome = parts[1].trim();
+            String tipo = parts[2].trim();
+            String cpf = parts[3].trim();
+            String email = parts[4].trim();
+            String senha = parts[5].trim();
+            String telefone = parts[6].trim();
+            String endereco = parts[7].trim();
+            // Verifica se todos os campos obrigatórios estão presentes e não vazios
+            if (nome.isEmpty() || tipo.isEmpty() || cpf.isEmpty() || email.isEmpty() ||
+                    senha.isEmpty() || telefone.isEmpty() || endereco.isEmpty()) {
+                throw new LoginException("Um ou mais campos obrigatórios estão vazios.");
+            }
+            // Retorna um objeto dependendo do tipo
+            if (tipo.equals("Administrador")) {
+                return new Administrador(id, nome, cpf, email, senha, telefone, endereco);
+            } else if (tipo.equals("Funcionario")) {
+                return new Funcionario(id, nome, cpf, email, senha, telefone, endereco);
+            } else {
+                throw new LoginException("Tipo de usuário inválido.");
+            }
+        } catch (NumberFormatException e) {
+            // Se a conversão do id falhar, lança LoginException
+            throw new LoginException("Falha na conversão do ID: " + e.getMessage());
+        } catch (Exception e) {
+            // Captura qualquer outra exceção que possa ocorrer e lança LoginException
+            throw new LoginException("Erro desconhecido: " + e.getMessage());
+        }
+    }
 
     public void criarNovoProduto(Scanner scanner, List<Veiculo> carro, List<Aviao> aviao, List<Embarcacao> embarcacao) {
         System.out.println("Escolha o produto:");
@@ -75,45 +123,23 @@ public abstract class Usuario {
             System.out.print("Digite o número de rodas do Veículo: ");
             int numRodas = Integer.parseInt(scanner.nextLine());
 
-            Veiculo veiculo = new Carro(codVeiculo, tipoVeiculo, marca, modelo, ano, quilometragem, cor, capacidadeDePassageiro,
-                    preco, quantidade, numRodas, carroceria, numAssentos, portas, capacidadePortaMalas, tipoMotor, potenciaMotor, tipoCombustivel, tipoCambio);
+            Veiculo veiculo = new Carro(codVeiculo, tipoVeiculo, marca, modelo, ano, quilometragem, cor,
+                    capacidadeDePassageiro, preco, quantidade, numRodas, carroceria, numAssentos, portas,
+                    capacidadePortaMalas, tipoMotor, potenciaMotor, tipoCombustivel, tipoCambio);
             carro.add(veiculo);
-
-
         } else if (numero == 2) {
             System.out.println("--Avião--");
 
         } else if (numero == 3) {
             System.out.println("--Embarcação--");
-
         }
     }
 
-    // Método para formatar os dados do usuário como uma linha de texto separada por virgula
-    public String toFileString() {
-        return String.join(",", String.valueOf(idUsuario), nome, tipo, cpf, email, senha, telefone, endereco);
-    }
 
-    // Método para criar um usuário a partir de uma linha de texto
-    //Recebe dados de um usuário delimitados por virgula
-    public static Usuario fromFileString(String fileString) {
-        //Separa cada parte dos dados e coloca num array
-        String[] parts = fileString.split(",");
-        int id = Integer.parseInt(parts[0]);
-        String nome = parts[1];
-        String tipo = parts[2];
-        String cpf = parts[3];
-        String email = parts[4];
-        String senha = parts[5];
-        String telefone = parts[6];
-        String endereco = parts[7];
-        //Retorna um objeto dependendo do tipo
-        if (tipo.equals("Administrador")) {
-            return new Administrador(id, nome, cpf, email, senha, telefone, endereco);
-        } else if (tipo.equals("Funcionario")) {
-            return new Funcionario(id, nome, cpf, email, senha, telefone, endereco);
-        }
-        return null;
+    @Override
+    public String toString() {
+        return "ID: " + idUsuario + ", Nome: " + nome + ", Tipo: " + tipo + ", CPF: " + cpf + ", Email: " + email +
+                ", Telefone: " + telefone + ", Endereço: " + endereco;
     }
 
     public int getIdUsuario() {
