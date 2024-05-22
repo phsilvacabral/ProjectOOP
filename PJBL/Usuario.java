@@ -1,5 +1,8 @@
 package PJBL;
 
+import java.util.List;
+import java.util.Scanner;
+
 public abstract class Usuario {
     private int idUsuario;
     private String nome;
@@ -20,6 +23,70 @@ public abstract class Usuario {
         this.senha = senha;
         this.telefone = telefone;
         this.endereco = endereco;
+    }
+
+
+    public void criarNovoProduto(Scanner scanner, List<Veiculo> carro, List<Aviao> aviao, List<Embarcacao> embarcacao) {
+        System.out.println("Escolha o produto:");
+        System.out.println("1-> Carro");
+        System.out.println("2-> Avião");
+        System.out.println("3-> Embarcação");
+        int numero = scanner.nextInt();
+        scanner.nextLine();
+
+        if (numero == 1) {
+            int codVeiculo = carro.size() + 1;
+            System.out.print("O id do carro é " + codVeiculo);
+            System.out.println("--Carro--");
+            System.out.print("Digite o tipo da carroceria: ");
+            String carroceria = scanner.nextLine();
+            System.out.print("Digite o número de assentos: ");
+            int numAssentos = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o número de portas: ");
+            int portas = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a capacidade do porta-malas: ");
+            int capacidadePortaMalas = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o tipo do motor: ");
+            String tipoMotor = scanner.nextLine();
+            System.out.print("Digite a potência do motor: ");
+            int potenciaMotor = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o tipo do combustível: ");
+            String tipoCombustivel = scanner.nextLine();
+            System.out.print("Digite o tipo do câmbio: ");
+            String tipoCambio = scanner.nextLine();
+            System.out.print("Digite o tipo do veículo: ");
+            String tipoVeiculo = scanner.nextLine();
+            System.out.print("Digite a marca do Veículo: ");
+            String marca = scanner.nextLine();
+            System.out.print("Digite o modelo Veículo: ");
+            String modelo = scanner.nextLine();
+            System.out.print("Digite o ano do Veículo: ");
+            int ano = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a quilometragem do Veículo: ");
+            int quilometragem = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a cor do Veículo: ");
+            String cor = scanner.nextLine();
+            System.out.print("Digite a capacidade de passageiros do Veículo: ");
+            int capacidadeDePassageiro = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o preço do Veículo: ");
+            float preco = Float.parseFloat(scanner.nextLine());
+            System.out.print("Digite a quantidade desse Veículo: ");
+            int quantidade = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o número de rodas do Veículo: ");
+            int numRodas = Integer.parseInt(scanner.nextLine());
+
+            Veiculo veiculo = new Carro(codVeiculo, tipoVeiculo, marca, modelo, ano, quilometragem, cor, capacidadeDePassageiro,
+                    preco, quantidade, numRodas, carroceria, numAssentos, portas, capacidadePortaMalas, tipoMotor, potenciaMotor, tipoCombustivel, tipoCambio);
+            carro.add(veiculo);
+
+
+        } else if (numero == 2) {
+            System.out.println("--Avião--");
+
+        } else if (numero == 3) {
+            System.out.println("--Embarcação--");
+
+        }
     }
 
     // Método para formatar os dados do usuário como uma linha de texto separada por virgula
