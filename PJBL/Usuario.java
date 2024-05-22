@@ -22,6 +22,33 @@ public abstract class Usuario {
         this.endereco = endereco;
     }
 
+    // Método para formatar os dados do usuário como uma linha de texto separada por virgula
+    public String toFileString() {
+        return String.join(",", String.valueOf(idUsuario), nome, tipo, cpf, email, senha, telefone, endereco);
+    }
+
+    // Método para criar um usuário a partir de uma linha de texto
+    //Recebe dados de um usuário delimitados por virgula
+    public static Usuario fromFileString(String fileString) {
+        //Separa cada parte dos dados e coloca num array
+        String[] parts = fileString.split(",");
+        int id = Integer.parseInt(parts[0]);
+        String nome = parts[1];
+        String tipo = parts[2];
+        String cpf = parts[3];
+        String email = parts[4];
+        String senha = parts[5];
+        String telefone = parts[6];
+        String endereco = parts[7];
+        //Retorna um objeto dependendo do tipo
+        if (tipo.equals("Administrador")) {
+            return new Administrador(id, nome, cpf, email, senha, telefone, endereco);
+        } else if (tipo.equals("Funcionario")) {
+            return new Funcionario(id, nome, cpf, email, senha, telefone, endereco);
+        }
+        return null;
+    }
+
     public int getIdUsuario() {
         return idUsuario;
     }

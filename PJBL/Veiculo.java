@@ -8,12 +8,12 @@ public abstract class Veiculo {
     private int ano;
     private int quilometragem;
     private String cor;
-    private String placa;
+    private int capacidadeDePassageiro;
     private double preco;
     private int quantidade;
 
     public Veiculo(int codVeiculo, String tipo, String marca, String modelo, int ano, int quilometragem, String cor,
-                   String placa, double preco, int quantidade) {
+                   int capacidadeDePassageiro, double preco, int quantidade) {
         this.codVeiculo = codVeiculo;
         this.tipo = tipo;
         this.marca = marca;
@@ -21,7 +21,7 @@ public abstract class Veiculo {
         this.ano = ano;
         this.quilometragem = quilometragem;
         this.cor = cor;
-        this.placa = placa;
+        this.capacidadeDePassageiro = capacidadeDePassageiro;
         this.preco = preco;
         this.quantidade = quantidade;
     }
@@ -82,12 +82,12 @@ public abstract class Veiculo {
         this.cor = cor;
     }
 
-    public String getPlaca() {
-        return placa;
+    public int getCapacidadeDePassageiro() {
+        return capacidadeDePassageiro;
     }
 
-    public void setPlaca(String placa) {
-        this.placa = placa;
+    public void setCapacidadeDePassageiro(int capacidadeDePassageiro) {
+        this.capacidadeDePassageiro = capacidadeDePassageiro;
     }
 
     public double getPreco() {
