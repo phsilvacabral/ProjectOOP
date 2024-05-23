@@ -157,7 +157,42 @@ public abstract class Usuario {
             aviao.add(veiculo);
 
         } else if (numero == 3) {
+            int codVeiculo = embarcacao.size() + 1;
+            System.out.print("O id da embarcação é " + codVeiculo);
             System.out.println("--Embarcação--");
+            System.out.print("Digite o modelo da embarcação: ");
+            String modeloEmbarcacao = scanner.nextLine();
+            System.out.print("Digite a marca da embarcação: ");
+            String marcaEmbarcacao = scanner.nextLine();
+            System.out.print("Digite o ano de fabricação da embarcação: ");
+            int anoEmbarcacao = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o comprimento da embarcação: ");
+            float comprimentoEmbarcacao = Float.parseFloat(scanner.nextLine());
+            System.out.print("Digite a largura da embarcação: ");
+            float larguraEmbarcacao = Float.parseFloat(scanner.nextLine());
+            System.out.print("Digite o peso da embarcação: ");
+            float pesoEmbarcacao = Float.parseFloat(scanner.nextLine());
+            System.out.print("Digite a capacide de pessoas da embarcação: ");
+            int capacidadeEmbarcacao = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a quantidade de motores da embarcação: ");
+            int qntdMotorEmbarcacao = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a marca do motor da embarcação: ");
+            String marcaMotorEmbarcacao = scanner.nextLine();
+            System.out.print("Digite a potência do motor da embarcação: ");
+            String potenciaMotorEmbarcacao = scanner.nextLine();
+            System.out.print("Digite o combustível utilizado da embarcação: ");
+            String combustivelEmbarcacao = scanner.nextLine();
+            System.out.print("Digite o material usado na embarcação: ");
+            String materialEmbarcacao = scanner.nextLine();
+            System.out.print("Digite o preço da embarcação: ");
+            float precoEmbarcacao = Float.parseFloat(scanner.nextLine());
+            System.out.print("Digite a quantidade da embarcações: ");
+            int qntdEmbarcacao = Integer.parseInt(scanner.nextLine());
+
+            Veiculo veiculo = new Embarcacao(codVeiculo, modeloEmbarcacao, marcaEmbarcacao, anoEmbarcacao, comprimentoEmbarcacao,
+            larguraEmbarcacao, pesoEmbarcacao, capacidadeEmbarcacao, qntdMotorEmbarcacao, marcaMotorEmbarcacao, potenciaMotorEmbarcacao, 
+            combustivelEmbarcacao, materialEmbarcacao, precoEmbarcacao, qntdEmbarcacao);    
+            embarcacao.add(veiculo);
         }
     }
 
