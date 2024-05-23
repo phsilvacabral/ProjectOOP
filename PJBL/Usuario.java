@@ -128,7 +128,33 @@ public abstract class Usuario {
                     capacidadePortaMalas, tipoMotor, potenciaMotor, tipoCombustivel, tipoCambio);
             carro.add(veiculo);
         } else if (numero == 2) {
+            int codVeiculo = aviao.size() + 1;
+            System.out.print("O id do avião é " + codVeiculo);
             System.out.println("--Avião--");
+            System.out.print("Digite o fabricante da aeronave: ");
+            String fabricanteAero = scanner.nextLine();
+            System.out.print("Digite o modelo da aeronave: ");
+            String modeloAero = scanner.nextLine();
+            System.out.print("Digite a cor da aeronave: ");
+            String corAero = scanner.nextLine();
+            System.out.print("Digite o ano de fabricação da aeronave: ");
+            int anoAero = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o motor da aeronave: ");
+            String motorAero = scanner.nextLine();
+            System.out.print("Digite o número de assentos da aeronave: ");
+            int assentosAero = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite as horas de voo da aeronave: ");
+            int hrsvooAero = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o número de série da aeronave: ");
+            float numserieAero = Float.parseFloat(scanner.nextLine());
+            System.out.print("Digite o preço da aeronave: ");
+            float precoAero = Float.parseFloat(scanner.nextLine());
+            System.out.print("Digite a quantidade de aeronaves: ");
+            int qntdAero = Integer.parseInt(scanner.nextLine());
+
+            Veiculo veiculo = new Aviao(codVeiculo, fabricanteAero, modeloAero, corAero, anoAero, motorAero, assentosAero,
+                    hrsvooAero, numserieAero, precoAero, qntdAero);
+            aviao.add(veiculo);
 
         } else if (numero == 3) {
             System.out.println("--Embarcação--");
