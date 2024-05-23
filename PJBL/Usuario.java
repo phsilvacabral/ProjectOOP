@@ -74,7 +74,7 @@ public abstract class Usuario {
         }
     }
 
-    public void criarNovoProduto(Scanner scanner, List<Veiculo> carro, List<Aviao> aviao, List<Embarcacao> embarcacao) {
+    public void criarNovoProduto(Scanner scanner, List<Veiculo> carro, List<Veiculo> aviao, List<Veiculo> embarcacao) {
         System.out.println("Escolha o produto:");
         System.out.println("1-> Carro");
         System.out.println("2-> Avião");
@@ -127,72 +127,189 @@ public abstract class Usuario {
                     capacidadeDePassageiro, preco, quantidade, numRodas, carroceria, numAssentos, portas,
                     capacidadePortaMalas, tipoMotor, potenciaMotor, tipoCombustivel, tipoCambio);
             carro.add(veiculo);
+
         } else if (numero == 2) {
             int codVeiculo = aviao.size() + 1;
             System.out.print("O id do avião é " + codVeiculo);
             System.out.println("--Avião--");
-            System.out.print("Digite o fabricante da aeronave: ");
-            String fabricanteAero = scanner.nextLine();
+            System.out.print("Digite o tipo da aeronave: ");
+            String tipo = scanner.nextLine();
+            System.out.print("Digite a marca da aeronave: ");
+            String marca = scanner.nextLine();
             System.out.print("Digite o modelo da aeronave: ");
-            String modeloAero = scanner.nextLine();
-            System.out.print("Digite a cor da aeronave: ");
-            String corAero = scanner.nextLine();
+            String modelo = scanner.nextLine();
             System.out.print("Digite o ano de fabricação da aeronave: ");
-            int anoAero = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o motor da aeronave: ");
-            String motorAero = scanner.nextLine();
-            System.out.print("Digite o número de assentos da aeronave: ");
-            int assentosAero = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite as horas de voo da aeronave: ");
-            int hrsvooAero = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o número de série da aeronave: ");
-            float numserieAero = Float.parseFloat(scanner.nextLine());
+            int ano = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a quilometragem da aeronave: ");
+            int quilometragem = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a cor da aeronave: ");
+            String cor = scanner.nextLine();
+            System.out.print("Digite a capacidade de passageiros da aeronave: ");
+            int capacidadeDePassageiro = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o preço da aeronave: ");
+            double preco = Float.parseFloat(scanner.nextLine());
             System.out.print("Digite o preço da aeronave: ");
             float precoAero = Float.parseFloat(scanner.nextLine());
             System.out.print("Digite a quantidade de aeronaves: ");
-            int qntdAero = Integer.parseInt(scanner.nextLine());
+            int quantidade = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o tipo de propulsão da aeronave: ");
+            String tipoPropulsao = scanner.nextLine();
+            System.out.print("Digite a quantidade de motores da aeronaves: ");
+            int numeroDeMotore = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o tipo da aeronave: ");
+            String tipoDeAviao = scanner.nextLine();
+            System.out.print("Digite o alcance de voo da aeronaves: ");
+            double alcanceDeVoo = Integer.parseInt(scanner.nextLine());
 
-            Veiculo veiculo = new Aviao(codVeiculo, fabricanteAero, modeloAero, corAero, anoAero, motorAero, assentosAero,
-                    hrsvooAero, numserieAero, precoAero, qntdAero);
+            Veiculo veiculo = new Aviao(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor,
+                    capacidadeDePassageiro, preco, quantidade, tipoPropulsao, numeroDeMotore, tipoDeAviao, alcanceDeVoo);
+
             aviao.add(veiculo);
 
         } else if (numero == 3) {
             int codVeiculo = embarcacao.size() + 1;
             System.out.print("O id da embarcação é " + codVeiculo);
             System.out.println("--Embarcação--");
-            System.out.print("Digite o modelo da embarcação: ");
-            String modeloEmbarcacao = scanner.nextLine();
+            System.out.print("Digite o tipo da embarcação: ");
+            String tipo = scanner.nextLine();
             System.out.print("Digite a marca da embarcação: ");
-            String marcaEmbarcacao = scanner.nextLine();
-            System.out.print("Digite o ano de fabricação da embarcação: ");
-            int anoEmbarcacao = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o comprimento da embarcação: ");
-            float comprimentoEmbarcacao = Float.parseFloat(scanner.nextLine());
-            System.out.print("Digite a largura da embarcação: ");
-            float larguraEmbarcacao = Float.parseFloat(scanner.nextLine());
-            System.out.print("Digite o peso da embarcação: ");
-            float pesoEmbarcacao = Float.parseFloat(scanner.nextLine());
-            System.out.print("Digite a capacide de pessoas da embarcação: ");
-            int capacidadeEmbarcacao = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a quantidade de motores da embarcação: ");
-            int qntdMotorEmbarcacao = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a marca do motor da embarcação: ");
-            String marcaMotorEmbarcacao = scanner.nextLine();
-            System.out.print("Digite a potência do motor da embarcação: ");
-            String potenciaMotorEmbarcacao = scanner.nextLine();
-            System.out.print("Digite o combustível utilizado da embarcação: ");
-            String combustivelEmbarcacao = scanner.nextLine();
-            System.out.print("Digite o material usado na embarcação: ");
-            String materialEmbarcacao = scanner.nextLine();
+            String marca = scanner.nextLine();
+            System.out.print("Digite o modelo da embarcação: ");
+            String modelo = scanner.nextLine();
+            System.out.print("Digite o ano da embarcação: ");
+            int ano = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a quilometragem da embarcação: ");
+            int quilometragem = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a cor da embarcação: ");
+            String cor = scanner.nextLine();
+            System.out.print("Digite a capacidade de passageiros da embarcação: ");
+            int capacidadeDePassageiro = Integer.parseInt(scanner.nextLine());
             System.out.print("Digite o preço da embarcação: ");
-            float precoEmbarcacao = Float.parseFloat(scanner.nextLine());
-            System.out.print("Digite a quantidade da embarcações: ");
-            int qntdEmbarcacao = Integer.parseInt(scanner.nextLine());
+            double preco = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite a quantidade de embarcações: ");
+            int quantidade = Integer.parseInt(scanner.nextLine());
+            System.out.print("Digite o tipo de propulsão da embarcação: ");
+            String tipoProplsao = scanner.nextLine();
+            System.out.print("Digite o alcance de navegação da embarcação: ");
+            double alcanceNavegacao = Integer.parseInt(scanner.nextLine());
 
-            Veiculo veiculo = new Embarcacao(codVeiculo, modeloEmbarcacao, marcaEmbarcacao, anoEmbarcacao, comprimentoEmbarcacao,
-            larguraEmbarcacao, pesoEmbarcacao, capacidadeEmbarcacao, qntdMotorEmbarcacao, marcaMotorEmbarcacao, potenciaMotorEmbarcacao, 
-            combustivelEmbarcacao, materialEmbarcacao, precoEmbarcacao, qntdEmbarcacao);    
+            Veiculo veiculo = new Embarcacao(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor, capacidadeDePassageiro, preco, quantidade,
+                    tipoProplsao, alcanceNavegacao);
+
             embarcacao.add(veiculo);
+        }
+    }
+
+    public class VerificacaoEmbarcacao {
+        public static void main(String[] args) {
+            Scanner scanner = new Scanner(System.in);
+
+            // Verificação do tipo da embarcação
+            String tipo;
+            do {
+                System.out.print("Digite o tipo da embarcação: ");
+                tipo = scanner.nextLine().trim();
+            } while (tipo.isEmpty());
+
+            // Verificação da marca da embarcação
+            String marca;
+            do {
+                System.out.print("Digite a marca da embarcação: ");
+                marca = scanner.nextLine().trim();
+            } while (marca.isEmpty());
+
+            // Verificação do modelo da embarcação
+            String modelo;
+            do {
+                System.out.print("Digite o modelo da embarcação: ");
+                modelo = scanner.nextLine().trim();
+            } while (modelo.isEmpty());
+
+            // Verificação do ano da embarcação
+            int ano;
+            do {
+                System.out.print("Digite o ano da embarcação: ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("Ano inválido. Digite apenas números positivos: ");
+                    scanner.next();
+                }
+                ano = scanner.nextInt();
+            } while (ano <= 0);
+
+            // Verificação da quilometragem da embarcação
+            int quilometragem;
+            do {
+                System.out.print("Digite a quilometragem da embarcação: ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("Quilometragem inválida. Digite apenas números positivos: ");
+                    scanner.next();
+                }
+                quilometragem = scanner.nextInt();
+            } while (quilometragem <= 0);
+
+            scanner.nextLine(); // Limpar o buffer do scanner
+
+            // Verificação da cor da embarcação
+            String cor;
+            do {
+                System.out.print("Digite a cor da embarcação: ");
+                cor = scanner.nextLine().trim();
+            } while (cor.isEmpty() || cor.matches(".*\\d+.*"));
+
+            // Verificação da capacidade de passageiros da embarcação
+            int capacidadeDePassageiro;
+            do {
+                System.out.print("Digite a capacidade de passageiros da embarcação: ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("Capacidade inválida. Digite apenas números positivos: ");
+                    scanner.next();
+                }
+                capacidadeDePassageiro = scanner.nextInt();
+            } while (capacidadeDePassageiro <= 0);
+
+            // Verificação do preço da embarcação
+            double preco;
+            do {
+                System.out.print("Digite o preço da embarcação: ");
+                while (!scanner.hasNextDouble()) {
+                    System.out.print("Preço inválido. Digite apenas números positivos: ");
+                    scanner.next();
+                }
+                preco = scanner.nextDouble();
+            } while (preco <= 0);
+
+            // Verificação da quantidade de embarcações
+            int quantidade;
+            do {
+                System.out.print("Digite a quantidade de embarcações: ");
+                while (!scanner.hasNextInt()) {
+                    System.out.print("Quantidade inválida. Digite apenas números positivos: ");
+                    scanner.next();
+                }
+                quantidade = scanner.nextInt();
+            } while (quantidade <= 0);
+
+            scanner.nextLine(); // Limpar o buffer do scanner
+
+            // Verificação do tipo de propulsão da embarcação
+            String tipoPropulsao;
+            do {
+                System.out.print("Digite o tipo de propulsão da embarcação: ");
+                tipoPropulsao = scanner.nextLine().trim();
+            } while (tipoPropulsao.isEmpty() || tipoPropulsao.matches(".*\\d+.*"));
+
+            // Verificação do alcance de navegação da embarcação
+            double alcanceNavegacao;
+            do {
+                System.out.print("Digite o alcance de navegação da embarcação: ");
+                while (!scanner.hasNextDouble()) {
+                    System.out.print("Alcance inválido. Digite apenas números positivos: ");
+                    scanner.next();
+                }
+                alcanceNavegacao = scanner.nextDouble();
+            } while (alcanceNavegacao <= 0);
+
+            // Agora você pode utilizar os dados verificados como desejar
         }
     }
 
