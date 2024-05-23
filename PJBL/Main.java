@@ -63,8 +63,8 @@ public class Main {
 
     public static void menu(Scanner scanner, Usuario usuarioLogado, List<Usuario> usuarios) throws LoginException {
         List<Veiculo> carro = new ArrayList<>();
-        List<Aviao> aviao = new ArrayList<>();
-        List<Embarcacao> embarcacao = new ArrayList<>();
+        List<Veiculo> aviao = new ArrayList<>();
+        List<Veiculo> embarcacao = new ArrayList<>();
         while (true) {
             try {
                 if (usuarioLogado instanceof Administrador admin) {
