@@ -1,6 +1,6 @@
 package PJBL;
-import java.util.List;
-import java.util.Scanner;
+
+import java.util.*;
 
 public abstract class Usuario {
     private int idUsuario;
@@ -74,7 +74,8 @@ public abstract class Usuario {
         }
     }
 
-    public void criarNovoProduto(Scanner scanner, List<Veiculo> carro, List<Veiculo> aviao, List<Veiculo> embarcacao) {
+    public void criarNovoProduto(Scanner scanner, List<Veiculo> carro, List<Veiculo> aviao, List<Veiculo> embarcacao)
+            throws LoginException {
         System.out.println("Escolha o produto:");
         System.out.println("1-> Carro");
         System.out.println("2-> Avião");
@@ -84,127 +85,377 @@ public abstract class Usuario {
 
         if (numero == 1) {
             int codVeiculo = carro.size() + 1;
-            System.out.print("O id do carro é " + codVeiculo);
+            System.out.println("O id do carro é " + codVeiculo);
             System.out.println("--Carro--");
-            System.out.print("Digite o tipo da carroceria: ");
-            String carroceria = scanner.nextLine();
-            System.out.print("Digite o número de assentos: ");
-            int numAssentos = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o número de portas: ");
-            int portas = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a capacidade do porta-malas: ");
-            int capacidadePortaMalas = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o tipo do motor: ");
-            String tipoMotor = scanner.nextLine();
-            System.out.print("Digite a potência do motor: ");
-            int potenciaMotor = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o tipo do combustível: ");
-            String tipoCombustivel = scanner.nextLine();
-            System.out.print("Digite o tipo do câmbio: ");
-            String tipoCambio = scanner.nextLine();
-            System.out.print("Digite o tipo do veículo: ");
-            String tipoVeiculo = scanner.nextLine();
-            System.out.print("Digite a marca do Veículo: ");
-            String marca = scanner.nextLine();
-            System.out.print("Digite o modelo Veículo: ");
-            String modelo = scanner.nextLine();
-            System.out.print("Digite o ano do Veículo: ");
-            int ano = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a quilometragem do Veículo: ");
-            int quilometragem = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a cor do Veículo: ");
-            String cor = scanner.nextLine();
-            System.out.print("Digite a capacidade de passageiros do Veículo: ");
-            int capacidadeDePassageiro = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o preço do Veículo: ");
-            float preco = Float.parseFloat(scanner.nextLine());
-            System.out.print("Digite a quantidade desse Veículo: ");
-            int quantidade = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o número de rodas do Veículo: ");
-            int numRodas = Integer.parseInt(scanner.nextLine());
 
-            Veiculo veiculo = new Carro(codVeiculo, tipoVeiculo, marca, modelo, ano, quilometragem, cor,
+            String carroceria = "";
+            while (carroceria.isEmpty()) {
+                System.out.print("Digite o tipo da carroceria: ");
+                carroceria = scanner.nextLine();
+                if (carroceria.isEmpty()) {
+                    System.out.println("Tipo da carroceria não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            int numAssentos = 0;
+            while (numAssentos <= 0) {
+                System.out.print("Digite o número de assentos: ");
+                try {
+                    numAssentos = Integer.parseInt(scanner.nextLine());
+                    if (numAssentos <= 0) {
+                        System.out.println("Número de assentos deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Número de assentos inválido. Tente novamente.");
+                }
+            }
+
+            int portas = 0;
+            while (portas <= 0) {
+                System.out.print("Digite o número de portas: ");
+                try {
+                    portas = Integer.parseInt(scanner.nextLine());
+                    if (portas <= 0) {
+                        System.out.println("Número de portas deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Número de portas inválido. Tente novamente.");
+                }
+            }
+
+            int capacidadePortaMalas = 0;
+            while (capacidadePortaMalas <= 0) {
+                System.out.print("Digite a capacidade do porta-malas: ");
+                try {
+                    capacidadePortaMalas = Integer.parseInt(scanner.nextLine());
+                    if (capacidadePortaMalas <= 0) {
+                        System.out.println("Capacidade do porta-malas deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Capacidade do porta-malas inválida. Tente novamente.");
+                }
+            }
+
+            String tipoMotor = "";
+            while (tipoMotor.isEmpty()) {
+                System.out.print("Digite o tipo do motor: ");
+                tipoMotor = scanner.nextLine();
+                if (tipoMotor.isEmpty()) {
+                    System.out.println("Tipo do motor não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            int potenciaMotor = 0;
+            while (potenciaMotor <= 0) {
+                System.out.print("Digite a potência do motor: ");
+                try {
+                    potenciaMotor = Integer.parseInt(scanner.nextLine());
+                    if (potenciaMotor <= 0) {
+                        System.out.println("Potência do motor deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Potência do motor inválida. Tente novamente.");
+                }
+            }
+
+            String tipoCombustivel = "";
+            while (tipoCombustivel.isEmpty()) {
+                System.out.print("Digite o tipo do combustível: ");
+                tipoCombustivel = scanner.nextLine();
+                if (tipoCombustivel.isEmpty()) {
+                    System.out.println("Tipo do combustível não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            String tipoCambio = "";
+            while (tipoCambio.isEmpty()) {
+                System.out.print("Digite o tipo do câmbio: ");
+                tipoCambio = scanner.nextLine();
+                if (tipoCambio.isEmpty()) {
+                    System.out.println("Tipo do câmbio não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            String marca = "";
+            while (marca.isEmpty()) {
+                System.out.print("Digite a marca do Veículo: ");
+                marca = scanner.nextLine();
+                if (marca.isEmpty()) {
+                    System.out.println("Marca do Veículo não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            String modelo = "";
+            while (modelo.isEmpty()) {
+                System.out.print("Digite o modelo Veículo: ");
+                modelo = scanner.nextLine();
+                if (modelo.isEmpty()) {
+                    System.out.println("Modelo do Veículo não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            int ano = 0;
+            while (ano <= 0) {
+                System.out.print("Digite o ano do Veículo: ");
+                try {
+                    ano = Integer.parseInt(scanner.nextLine());
+                    if (ano <= 0) {
+                        System.out.println("Ano do Veículo deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Ano do Veículo inválido. Tente novamente.");
+                }
+            }
+
+            int quilometragem = 0;
+            while (quilometragem <= 0) {
+                System.out.print("Digite a quilometragem do Veículo: ");
+                try {
+                    quilometragem = Integer.parseInt(scanner.nextLine());
+                    if (quilometragem < 0) {
+                        System.out.println("Quilometragem do Veículo não pode ser negativa. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Quilometragem do Veículo inválida. Tente novamente.");
+                }
+            }
+
+            String cor = "";
+            while (cor.isEmpty()) {
+                System.out.print("Digite a cor do Veículo: ");
+                cor = scanner.nextLine();
+                if (cor.isEmpty()) {
+                    System.out.println("Cor do Veículo não pode ser vazia. Tente novamente.");
+                }
+            }
+
+            int capacidadeDePassageiro = 0;
+            while (capacidadeDePassageiro <= 0) {
+                System.out.print("Digite a capacidade de passageiros do Veículo: ");
+                try {
+                    capacidadeDePassageiro = Integer.parseInt(scanner.nextLine());
+                    if (capacidadeDePassageiro <= 0) {
+                        System.out.println("Capacidade de passageiros deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Capacidade de passageiros inválida. Tente novamente.");
+                }
+            }
+
+            float preco = 0;
+            while (preco <= 0) {
+                System.out.print("Digite o preço do Veículo: ");
+                try {
+                    preco = Float.parseFloat(scanner.nextLine());
+                    if (preco <= 0) {
+                        System.out.println("Preço do Veículo deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Preço do Veículo inválido. Tente novamente.");
+                }
+            }
+
+            int quantidade = 0;
+            while (quantidade <= 0) {
+                System.out.print("Digite a quantidade desse Veículo: ");
+                try {
+                    quantidade = Integer.parseInt(scanner.nextLine());
+                    if (quantidade <= 0) {
+                        System.out.println("Quantidade deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Quantidade inválida. Tente novamente.");
+                }
+            }
+
+            int numRodas = 0;
+            while (numRodas <= 0) {
+                System.out.print("Digite o número de rodas do Veículo: ");
+                try {
+                    numRodas = Integer.parseInt(scanner.nextLine());
+                    if (numRodas <= 0) {
+                        System.out.println("Número de rodas deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Número de rodas inválido. Tente novamente.");
+                }
+            }
+
+            Veiculo veiculo = new Carro(codVeiculo, marca, modelo, ano, quilometragem, cor,
                     capacidadeDePassageiro, preco, quantidade, numRodas, carroceria, numAssentos, portas,
                     capacidadePortaMalas, tipoMotor, potenciaMotor, tipoCombustivel, tipoCambio);
             carro.add(veiculo);
 
+            String text = String.join(",", String.valueOf(codVeiculo), "Carro", marca, modelo,
+                    String.valueOf(ano), String.valueOf(quilometragem), cor, String.valueOf(capacidadeDePassageiro),
+                    String.valueOf(preco), String.valueOf(quantidade), String.valueOf(numRodas), carroceria,
+                    String.valueOf(numAssentos), String.valueOf(portas), String.valueOf(capacidadePortaMalas),
+                    tipoMotor, String.valueOf(potenciaMotor), tipoCombustivel, tipoCambio);
+            SistemaProduto.cadastrar(text);
+
         } else if (numero == 2) {
             int codVeiculo = aviao.size() + 1;
-            System.out.print("O id do avião é " + codVeiculo);
+            System.out.println("O id do avião é " + codVeiculo);
             System.out.println("--Avião--");
-            System.out.print("Digite o tipo da aeronave: ");
-            String tipo = scanner.nextLine();
-            System.out.print("Digite a marca da aeronave: ");
-            String marca = scanner.nextLine();
-            System.out.print("Digite o modelo da aeronave: ");
-            String modelo = scanner.nextLine();
-            System.out.print("Digite o ano de fabricação da aeronave: ");
-            int ano = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a quilometragem da aeronave: ");
-            int quilometragem = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a cor da aeronave: ");
-            String cor = scanner.nextLine();
-            System.out.print("Digite a capacidade de passageiros da aeronave: ");
-            int capacidadeDePassageiro = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o preço da aeronave: ");
-            double preco = Float.parseFloat(scanner.nextLine());
-            System.out.print("Digite o preço da aeronave: ");
-            float precoAero = Float.parseFloat(scanner.nextLine());
-            System.out.print("Digite a quantidade de aeronaves: ");
-            int quantidade = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o tipo de propulsão da aeronave: ");
-            String tipoPropulsao = scanner.nextLine();
-            System.out.print("Digite a quantidade de motores da aeronaves: ");
-            int numeroDeMotore = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o tipo da aeronave: ");
-            String tipoDeAviao = scanner.nextLine();
-            System.out.print("Digite o alcance de voo da aeronaves: ");
-            double alcanceDeVoo = Integer.parseInt(scanner.nextLine());
+
+            String tipo = "";
+            while (tipo.isEmpty()) {
+                System.out.print("Digite o tipo da aeronave: ");
+                tipo = scanner.nextLine();
+                if (tipo.isEmpty()) {
+                    System.out.println("Tipo da aeronave não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            String marca = "";
+            while (marca.isEmpty()) {
+                System.out.print("Digite a marca da aeronave: ");
+                marca = scanner.nextLine();
+                if (marca.isEmpty()) {
+                    System.out.println("Marca da aeronave não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            String modelo = "";
+            while (modelo.isEmpty()) {
+                System.out.print("Digite o modelo da aeronave: ");
+                modelo = scanner.nextLine();
+                if (modelo.isEmpty()) {
+                    System.out.println("Modelo da aeronave não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            int ano = 0;
+            while (ano <= 0) {
+                System.out.print("Digite o ano de fabricação da aeronave: ");
+                try {
+                    ano = Integer.parseInt(scanner.nextLine());
+                    if (ano <= 0) {
+                        System.out.println("Ano de fabricação deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Ano de fabricação inválido. Tente novamente.");
+                }
+            }
+
+            int quilometragem = 0;
+            while (quilometragem <= 0) {
+                System.out.print("Digite a quilometragem da aeronave: ");
+                try {
+                    quilometragem = Integer.parseInt(scanner.nextLine());
+                    if (quilometragem < 0) {
+                        System.out.println("Quilometragem da aeronave não pode ser negativa. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Quilometragem da aeronave inválida. Tente novamente.");
+                }
+            }
+
+            String cor = "";
+            while (cor.isEmpty()) {
+                System.out.print("Digite a cor da aeronave: ");
+                cor = scanner.nextLine();
+                if (cor.isEmpty()) {
+                    System.out.println("Cor da aeronave não pode ser vazia. Tente novamente.");
+                }
+            }
+
+            String tipoPropulsao = "";
+            while (tipoPropulsao.isEmpty()) {
+                System.out.print("Digite o tipo de propulsão da aeronave: ");
+                tipoPropulsao = scanner.nextLine().trim();
+                if (tipoPropulsao.isEmpty()) {
+                    System.out.println("Tipo de propulsão não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            // Coleta do tipo de avião
+            String tipoDeAviao = "";
+            while (tipoDeAviao.isEmpty()) {
+                System.out.print("Digite o tipo de avião: ");
+                tipoDeAviao = scanner.nextLine().trim();
+                if (tipoDeAviao.isEmpty()) {
+                    System.out.println("Tipo de avião não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            // Coleta do alcance de voo
+            double alcanceDeVoo = 0;
+            while (alcanceDeVoo <= 0) {
+                System.out.print("Digite o alcance de voo da aeronave (em km): ");
+                try {
+                    alcanceDeVoo = Double.parseDouble(scanner.nextLine());
+                    if (alcanceDeVoo <= 0) {
+                        System.out.println("Alcance de voo deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Valor inválido. Digite apenas números positivos.");
+                }
+            }
+
+
+            int capacidadeDePassageiro = 0;
+            while (capacidadeDePassageiro <= 0) {
+                System.out.print("Digite a capacidade de passageiros da aeronave: ");
+                try {
+                    capacidadeDePassageiro = Integer.parseInt(scanner.nextLine());
+                    if (capacidadeDePassageiro <= 0) {
+                        System.out.println("Capacidade de passageiros deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Capacidade de passageiros inválida. Tente novamente.");
+                }
+            }
+
+            float preco = 0;
+            while (preco <= 0) {
+                System.out.print("Digite o preço da aeronave: ");
+                try {
+                    preco = Float.parseFloat(scanner.nextLine());
+                    if (preco <= 0) {
+                        System.out.println("Preço da aeronave deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Preço da aeronave inválido. Tente novamente.");
+                }
+            }
+
+            int quantidade = 0;
+            while (quantidade <= 0) {
+                System.out.print("Digite a quantidade dessa aeronave: ");
+                try {
+                    quantidade = Integer.parseInt(scanner.nextLine());
+                    if (quantidade <= 0) {
+                        System.out.println("Quantidade deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Quantidade inválida. Tente novamente.");
+                }
+            }
+
+            int numMotores = 0;
+            while (numMotores <= 0) {
+                System.out.print("Digite o número de motores da aeronave: ");
+                try {
+                    numMotores = Integer.parseInt(scanner.nextLine());
+                    if (numMotores <= 0) {
+                        System.out.println("Número de motores deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Número de motores inválido. Tente novamente.");
+                }
+            }
 
             Veiculo veiculo = new Aviao(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor,
-                    capacidadeDePassageiro, preco, quantidade, tipoPropulsao, numeroDeMotore, tipoDeAviao, alcanceDeVoo);
-
+                    capacidadeDePassageiro, preco, quantidade, tipoPropulsao, numMotores, tipoDeAviao, alcanceDeVoo);
             aviao.add(veiculo);
 
+            String text = String.join(",", String.valueOf(codVeiculo), "Avião", marca, modelo,
+                    String.valueOf(ano), String.valueOf(quilometragem), cor, String.valueOf(capacidadeDePassageiro),
+                    String.valueOf(preco), String.valueOf(quantidade), String.valueOf(numMotores));
+            SistemaProduto.cadastrar(text);
+
         } else if (numero == 3) {
-            int codVeiculo = embarcacao.size() + 1;
-            System.out.print("O id da embarcação é " + codVeiculo);
-            System.out.println("--Embarcação--");
-            System.out.print("Digite o tipo da embarcação: ");
-            String tipo = scanner.nextLine();
-            System.out.print("Digite a marca da embarcação: ");
-            String marca = scanner.nextLine();
-            System.out.print("Digite o modelo da embarcação: ");
-            String modelo = scanner.nextLine();
-            System.out.print("Digite o ano da embarcação: ");
-            int ano = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a quilometragem da embarcação: ");
-            int quilometragem = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a cor da embarcação: ");
-            String cor = scanner.nextLine();
-            System.out.print("Digite a capacidade de passageiros da embarcação: ");
-            int capacidadeDePassageiro = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o preço da embarcação: ");
-            double preco = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite a quantidade de embarcações: ");
-            int quantidade = Integer.parseInt(scanner.nextLine());
-            System.out.print("Digite o tipo de propulsão da embarcação: ");
-            String tipoProplsao = scanner.nextLine();
-            System.out.print("Digite o alcance de navegação da embarcação: ");
-            double alcanceNavegacao = Integer.parseInt(scanner.nextLine());
-
-            Veiculo veiculo = new Embarcacao(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor, capacidadeDePassageiro, preco, quantidade,
-                    tipoProplsao, alcanceNavegacao);
-
-            embarcacao.add(veiculo);
-        }
-    }
-
-    public class VerificacaoEmbarcacao {
-        public static void main(String[] args) {
-            Scanner scanner = new Scanner(System.in);
-
-            // Verificação do tipo da embarcação
             String tipo;
             do {
                 System.out.print("Digite o tipo da embarcação: ");
@@ -308,8 +559,8 @@ public abstract class Usuario {
                 }
                 alcanceNavegacao = scanner.nextDouble();
             } while (alcanceNavegacao <= 0);
-
-            // Agora você pode utilizar os dados verificados como desejar
+        } else {
+            System.out.println("Opção inválida. Por favor, escolha uma opção válida.");
         }
     }
 

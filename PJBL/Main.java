@@ -3,13 +3,14 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import static PJBL.SistemaDeLogin.autenticar;
 import static PJBL.SistemaDeLogin.carregarUsuarios;
+import static PJBL.SistemaProduto.carregarProdutos;
 
 public class Main {
     public static void main(String[] args) throws LoginException {
         List<Usuario> usuarios = carregarUsuarios();
+        List<String> produtos = carregarProdutos();
 
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
@@ -78,7 +79,10 @@ public class Main {
                         System.out.println("--Cadastro de Usuário--");
                         admin.criarNovoUsuario(scanner, usuarios);
                     } else if (escolha == 2){
-                        System.out.println("--Cadastro de Produtos--");
+                        System.out.println("--Cadastro de Veiculos--");
+                        System.out.println("1. Criar Veiculo Terrestre");
+                        System.out.println("2. Criar Veiculo Aquatico");
+                        System.out.println("3. Criar Veiculo Aereo");
                         admin.criarNovoProduto(scanner, carro, aviao, embarcacao);
                     } else if (escolha == 3) {
                         break;
