@@ -10,11 +10,11 @@ public class Carro extends Terrestre {
     private String combustivel;
     private String cambio;
 
-    public Carro(int codVeiculo, String tipo, String marca, String modelo, int ano, int quilometragem, String cor,
+    public Carro(int codVeiculo, String marca, String modelo, int ano, int quilometragem, String cor,
                  int capacidadeDePassageiro, double preco, int quantidade, int numRodas, String tipoCarroceria,
                  int numAssentos, int numPortas, int capacidadePortaMala, String motor, int potenciaMotor,
                  String combustivel, String cambio) {
-        super(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor, capacidadeDePassageiro, preco, quantidade,
+        super(codVeiculo, "Carro", marca, modelo, ano, quilometragem, cor, capacidadeDePassageiro, preco, quantidade,
                 numRodas);
         this.tipoCarroceria = tipoCarroceria;
         this.numAssentos = numAssentos;
