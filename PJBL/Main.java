@@ -1,8 +1,10 @@
 package PJBL;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 import static PJBL.SistemaDeLogin.autenticar;
 import static PJBL.SistemaDeLogin.carregarUsuarios;
 import static PJBL.SistemaProduto.carregarProdutos;
@@ -10,7 +12,7 @@ import static PJBL.SistemaProduto.carregarProdutos;
 public class Main {
     public static void main(String[] args) throws LoginException {
         List<Usuario> usuarios = carregarUsuarios();
-        List<String> produtos = carregarProdutos();
+
 
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
@@ -63,37 +65,68 @@ public class Main {
     }
 
     public static void menu(Scanner scanner, Usuario usuarioLogado, List<Usuario> usuarios) throws LoginException {
-        List<Veiculo> carro = new ArrayList<>();
-        List<Veiculo> aviao = new ArrayList<>();
-        List<Veiculo> embarcacao = new ArrayList<>();
+        List<Veiculo> carros = new ArrayList<>();
+        List<Veiculo> avioes = new ArrayList<>();
+        List<Veiculo> embarcacoes = new ArrayList<>();
+
+        List<String> produtos = SistemaProduto.carregarProdutos();
+
         while (true) {
             try {
                 if (usuarioLogado instanceof Administrador admin) {
                     System.out.println("--- MENU ADMINISTRADOR ---");
                     System.out.println("1. Criar novo usuário");
                     System.out.println("2. Cadastrar Produto");
-                    System.out.println("3. Sair");
+                    System.out.println("3. Carregar Produtos");
+                    System.out.println("4. Editar Produtos");
+                    System.out.println("5. Sair");
 
                     int escolha = Integer.parseInt(scanner.nextLine());
+
                     if (escolha == 1) {
-                        System.out.println("--Cadastro de Usuário--");
+                        System.out.println("-- Cadastro de Usuário --");
                         admin.criarNovoUsuario(scanner, usuarios);
-                    } else if (escolha == 2){
-                        System.out.println("--Cadastro de Veiculos--");
-                        System.out.println("1. Criar Veiculo Terrestre");
-                        System.out.println("2. Criar Veiculo Aquatico");
-                        System.out.println("3. Criar Veiculo Aereo");
-                        admin.criarNovoProduto(scanner, carro, aviao, embarcacao);
+                    } else if (escolha == 2) {
+                        System.out.println("-- Cadastro de Veículos --");
+                        System.out.println("1. Veículo Terrestre");
+                        System.out.println("2. Veículo Aquático");
+                        System.out.println("3. Veículo Aéreo");
+
+                        int tipoVeiculo = Integer.parseInt(scanner.nextLine());
+
+                        if (tipoVeiculo == 1) {
+                            System.out.println("Criar Veículo Terrestre (Carro)");
+                            admin.criarNovoProduto(scanner, 1, carros, new ArrayList<>(), new ArrayList<>());
+                        } else if (tipoVeiculo == 2) {
+                            System.out.println("Criar Veículo Aquático (Embarcação)");
+                            admin.criarNovoProduto(scanner, 2, new ArrayList<>(), new ArrayList<>(), embarcacoes);
+                        } else if (tipoVeiculo == 3) {
+                            System.out.println("Criar Veículo Aéreo (Avião)");
+                            admin.criarNovoProduto(scanner, 3, new ArrayList<>(), avioes, new ArrayList<>());
+                        } else {
+                            System.out.println("Opção inválida.");
+                        }
                     } else if (escolha == 3) {
+                        System.out.println("-- Produtos Carregados --");
+                        produtos = SistemaProduto.carregarProdutos();
+                        for (String produto : produtos) {
+                            System.out.println(produto);
+                        }
+                    } else if (escolha == 4) {
+                        SistemaProduto.editarProduto(scanner, produtos);
+                    } else if (escolha == 5) {
                         break;
                     } else {
                         System.out.println("Opção inválida.");
                     }
                 } else {
                     System.out.println("--- MENU FUNCIONARIO ---");
+                    // Adicione as opções para funcionários aqui
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida! Por favor, digite um número válido.");
+            } catch (LoginException e) {
+                System.out.println(e.getMessage());
             }
         }
     }
