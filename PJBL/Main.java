@@ -79,7 +79,8 @@ public class Main {
                     System.out.println("2. Cadastrar Produto");
                     System.out.println("3. Carregar Produtos");
                     System.out.println("4. Editar Produtos");
-                    System.out.println("5. Sair");
+                    System.out.println("5. Excluir Produtos");
+                    System.out.println("0. Sair");
 
                     int escolha = Integer.parseInt(scanner.nextLine());
 
@@ -115,6 +116,8 @@ public class Main {
                     } else if (escolha == 4) {
                         SistemaProduto.editarProduto(scanner, produtos);
                     } else if (escolha == 5) {
+                        SistemaProduto.excluirProduto(scanner, produtos);
+                    } else if (escolha == 0) {
                         break;
                     } else {
                         System.out.println("Opção inválida.");
@@ -131,4 +134,3 @@ public class Main {
         }
     }
 }
-
