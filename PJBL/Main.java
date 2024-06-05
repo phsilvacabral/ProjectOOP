@@ -1,13 +1,11 @@
 package PJBL;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import static PJBL.SistemaDeLogin.autenticar;
 import static PJBL.SistemaDeLogin.carregarUsuarios;
-import static PJBL.SistemaProduto.carregarProdutos;
 
 public class Main {
     public static void main(String[] args) throws LoginException {
@@ -20,7 +18,7 @@ public class Main {
                     System.out.println("--- BEM-VINDO ---");
                     System.out.println("1. Login");
                     System.out.println("2. Sair");
-                    System.out.print("Escolha uma opção: ");
+                    System.out.print("--> ");
 
                     int opcao = Integer.parseInt(scanner.nextLine());
                     if (opcao == 1) {
@@ -76,11 +74,13 @@ public class Main {
                 if (usuarioLogado instanceof Administrador admin) {
                     System.out.println("--- MENU ADMINISTRADOR ---");
                     System.out.println("1. Criar novo usuário");
-                    System.out.println("2. Cadastrar Produto");
-                    System.out.println("3. Carregar Produtos");
-                    System.out.println("4. Editar Produtos");
-                    System.out.println("5. Excluir Produtos");
+                    System.out.println("2. Editar usuário");
+                    System.out.println("3. Cadastrar Produto");
+                    System.out.println("4. Carregar Produtos");
+                    System.out.println("5. Editar Produtos");
+                    System.out.println("6. Excluir Produtos");
                     System.out.println("0. Sair");
+                    System.out.print("--> ");
 
                     int escolha = Integer.parseInt(scanner.nextLine());
 
@@ -88,6 +88,9 @@ public class Main {
                         System.out.println("-- Cadastro de Usuário --");
                         admin.criarNovoUsuario(scanner, usuarios);
                     } else if (escolha == 2) {
+                        System.out.println("-- Edição de Usuário --");
+                        admin.editarUsuario(scanner, usuarios);
+                    } else if (escolha == 3) {
                         System.out.println("-- Cadastro de Veículos --");
                         System.out.println("1. Veículo Terrestre");
                         System.out.println("2. Veículo Aquático");
@@ -100,22 +103,23 @@ public class Main {
                             admin.criarNovoProduto(scanner, 1, carros, new ArrayList<>(), new ArrayList<>());
                         } else if (tipoVeiculo == 2) {
                             System.out.println("Criar Veículo Aquático (Embarcação)");
-                            admin.criarNovoProduto(scanner, 2, new ArrayList<>(), new ArrayList<>(), embarcacoes);
+                            admin.criarNovoProduto(scanner, 2, new ArrayList<>(), new ArrayList<>(),
+                                    embarcacoes);
                         } else if (tipoVeiculo == 3) {
                             System.out.println("Criar Veículo Aéreo (Avião)");
                             admin.criarNovoProduto(scanner, 3, new ArrayList<>(), avioes, new ArrayList<>());
                         } else {
                             System.out.println("Opção inválida.");
                         }
-                    } else if (escolha == 3) {
+                    } else if (escolha == 4) {
                         System.out.println("-- Produtos Carregados --");
                         produtos = SistemaProduto.carregarProdutos();
                         for (String produto : produtos) {
                             System.out.println(produto);
                         }
-                    } else if (escolha == 4) {
-                        SistemaProduto.editarProduto(scanner, produtos);
                     } else if (escolha == 5) {
+                        SistemaProduto.editarProduto(scanner, produtos);
+                    } else if (escolha == 6) {
                         SistemaProduto.excluirProduto(scanner, produtos);
                     } else if (escolha == 0) {
                         break;

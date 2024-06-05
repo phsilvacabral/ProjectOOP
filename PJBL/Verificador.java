@@ -54,6 +54,48 @@ public class Verificador {
         return resultado == digito2;
     }
 
+    public static boolean verificaCPF(String cpf) {
+        if (cpf == null || cpf.isBlank()) {
+            return false;
+        }
+        // Remove as pontuações do CPF e verifica se todos os caracteres restantes são dígitos
+        cpf = cpf.replaceAll("\\D", "");
+        if (cpf.length() != 11 || !cpf.matches("\\d{11}")) {
+            return false;
+        }
+
+        // Calcula e verifica os dígitos verificadores do CPF
+        int digito1 = Character.getNumericValue(cpf.charAt(9));
+        int digito2 = Character.getNumericValue(cpf.charAt(10));
+        int soma, resto, resultado;
+
+        soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+        }
+        resto = soma % 11;
+        if (resto < 2) {
+            resultado = 0;
+        } else {
+            resultado = 11 - resto;
+        }
+        if (resultado != digito1) {
+            return false;
+        }
+
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+        }
+        resto = soma % 11;
+        if (resto < 2) {
+            resultado = 0;
+        } else {
+            resultado = 11 - resto;
+        }
+        return resultado == digito2;
+    }
+
 
     public static boolean verificarTelefone(String telefone) {
         if (telefone == null || telefone.isBlank()) {

@@ -58,6 +58,38 @@ public class SistemaDeLogin {
         }
     }
 
+    public static void atualizarUsuario(Usuario usuario, String cpfFormatted) throws
+            LoginException {
+        List<String> linhas = new ArrayList<>();
+
+        // Leitura do arquivo
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                Usuario usuarioLinha = Usuario.fromFileString(linha);
+                if (usuarioLinha.getCpf().equals(cpfFormatted)) {
+                    // Substitui o usuário antigo pelo novo usuário editado
+                    linhas.add(usuario.toFileString());
+                } else {
+                    // Adiciona as linhas que não foram modificadas
+                    linhas.add(linha);
+                }
+            }
+        } catch (IOException e) {
+            throw new LoginException("Erro ao ler arquivo: " + e.getMessage());
+        }
+
+        // Escrita do arquivo
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (String linha : linhas) {
+                bw.write(linha);
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            throw new LoginException("Erro ao escrever arquivo: " + e.getMessage());
+        }
+    }
+
     // Autenticar usuário
     public static Usuario autenticar(String email, String senha, List<Usuario> usuarios) {
         //Intera por cada usuario

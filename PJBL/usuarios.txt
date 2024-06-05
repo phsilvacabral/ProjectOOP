@@ -1,2 +1,2 @@
-1,Daniel Ganz Musse,Administrador,09554774923,danielganzmusse@gmail.com,danieladmin,42998194028,Rua Paulo Zilioto, 852,jonas,Funcionario,09554774923,fofo@fofo.com,123,12218332,rua
-3,joao boao,Funcionario,5,joao@joao.com,5,5,rua
+1,Daniel Ganz Musse,Administrador,09554774923,danielganzmusse@gmail.com,danieladmin,42998194028,Rua Paulo Zilioto
+2,teste edicao,Funcionario,300.121.960-29,testeedicao@gmail.com,edicao,(42) 99977-3978,rua edicao
