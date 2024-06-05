@@ -45,8 +45,8 @@ public class SistemaProduto {
 
     public static void cadastrar(String produto) throws LoginException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
-            bw.newLine();
             bw.write(produto);
+            bw.newLine(); // Move the newLine() method after writing the product to avoid an empty first line
         } catch (IOException e) {
             throw new LoginException("Erro ao salvar produto: " + e.getMessage());
         }
@@ -91,6 +91,22 @@ public class SistemaProduto {
         }
     }
 
+    public static void excluirProduto(Scanner scanner, List<String> produtos) throws LoginException {
+        System.out.println("-- Excluir Produtos --");
+        listarProdutos(produtos);
+
+        System.out.println("Selecione o número do produto que deseja excluir:");
+        int produtoIndex = Integer.parseInt(scanner.nextLine()) - 1;
+
+        if (produtoIndex >= 0 && produtoIndex < produtos.size()) {
+            produtos.remove(produtoIndex);
+            salvarProdutos(produtos);
+            System.out.println("Produto excluído com sucesso.");
+        } else {
+            System.out.println("Número de produto inválido.");
+        }
+    }
+
     private static void listarProdutos(List<String> produtos) {
         System.out.println("Produtos Carregados:");
         for (int i = 0; i < produtos.size(); i++) {
@@ -109,4 +125,48 @@ public class SistemaProduto {
         }
     }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            List<String> produtos = carregarProdutos();
+
+            while (true) {
+                System.out.println("\n-- Sistema de Produtos --");
+                System.out.println("1. Listar produtos");
+                System.out.println("2. Cadastrar produto");
+                System.out.println("3. Editar produto");
+                System.out.println("4. Excluir produto");
+                System.out.println("5. Sair");
+                System.out.print("Escolha uma opção: ");
+                int opcao = Integer.parseInt(scanner.nextLine());
+
+                switch (opcao) {
+                    case 1:
+                        listarProdutos(produtos);
+                        break;
+                    case 2:
+                        System.out.println("Digite o nome e o preço do produto (separados por vírgula):");
+                        String produto = scanner.nextLine();
+                        cadastrar(produto);
+                        produtos = carregarProdutos(); // Recarrega a lista de produtos após cadastrar
+                        break;
+                    case 3:
+                        editarProduto(scanner, produtos);
+                        break;
+                    case 4:
+                        excluirProduto(scanner, produtos);
+                        break;
+                    case 5:
+                        System.out.println("Saindo do sistema...");
+                        return;
+                    default:
+                        System.out.println("Opção inválida.");
+                }
+            }
+        } catch (LoginException e) {
+            System.out.println("Erro: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
 }
