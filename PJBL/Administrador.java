@@ -1,4 +1,5 @@
 package PJBL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,7 +11,15 @@ public class Administrador extends Usuario {
 
     //Método do Administrador para criar Usuario
     public void criarNovoUsuario(Scanner scanner, List<Usuario> usuarios) throws LoginException {
-        int id = usuarios.size() + 1;
+        // Encontrar o menor ID livre
+        int id = 1;
+        List<Integer> idsExistentes = new ArrayList<>();
+        for (Usuario usuario : usuarios) {
+            idsExistentes.add(usuario.getIdUsuario());
+        }
+        while (idsExistentes.contains(id)) {
+            id++;
+        }
         System.out.println("Usuário com ID " + id + " está sendo criado.");
 
         System.out.print("Digite o nome do novo usuário: ");
@@ -182,6 +191,50 @@ public class Administrador extends Usuario {
 
             SistemaDeLogin.atualizarUsuario(usuarioEncontrado, cpfFormatted);
             System.out.println("Usuário editado com sucesso.");
+        } else {
+            System.out.println("Usuário não encontrado.");
+        }
+    }
+
+    public void deletarUsuario (Scanner scanner, List<Usuario> usuarios, Usuario usuarioLogado) throws LoginException {
+        System.out.print("Infome o CPF do Usuário: ");
+        String cpf = scanner.nextLine();
+        while(!Verificador.verificaCPF(cpf)) {
+            System.out.print("CPF inválido! Por favor, digite novamente: ");
+            cpf = scanner.nextLine();
+        }
+        //Remove caracteres não numericos e formata
+        cpf = cpf.replaceAll("\\D", "");
+        String cpfFormatted = cpf.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+
+        if (cpfFormatted.equals(usuarioLogado.getCpf())) {
+            System.out.println("Não é possível apagar a conta em utilização.");
+            return;
+        }
+
+        Usuario usuarioEncontrado = null;
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCpf().equals(cpfFormatted)) {
+                usuarioEncontrado = usuario;
+                break;
+            }
+        }
+
+        if (usuarioEncontrado != null) {
+            System.out.println("O usuário a ser deletado é (" + usuarioEncontrado.getNome() + ") ");
+            System.out.print("Digite a sua senha para confirmar a exclusão ou ENTER para cancelar: ");
+            String senha = scanner.nextLine();
+            if (senha.isBlank()){
+                return;
+            }
+            while (!senha.equals(usuarioLogado.getSenha())) {
+                System.out.print("Senha inválida! Por favor, digite novamente: ");
+                senha = scanner.nextLine();
+            }
+
+            SistemaDeLogin.removerUsuario(cpfFormatted);
+            usuarios.remove(usuarioEncontrado);
+            System.out.println("Usuário removido com sucesso.");
         } else {
             System.out.println("Usuário não encontrado.");
         }

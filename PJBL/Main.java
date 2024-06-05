@@ -75,10 +75,11 @@ public class Main {
                     System.out.println("--- MENU ADMINISTRADOR ---");
                     System.out.println("1. Criar novo usuário");
                     System.out.println("2. Editar usuário");
-                    System.out.println("3. Cadastrar Produto");
-                    System.out.println("4. Carregar Produtos");
-                    System.out.println("5. Editar Produtos");
-                    System.out.println("6. Excluir Produtos");
+                    System.out.println("3. Deletar usuário");
+                    System.out.println("4. Cadastrar Produto");
+                    System.out.println("5. Carregar Produtos");
+                    System.out.println("6. Editar Produtos");
+                    System.out.println("7. Excluir Produtos");
                     System.out.println("0. Sair");
                     System.out.print("--> ");
 
@@ -91,6 +92,9 @@ public class Main {
                         System.out.println("-- Edição de Usuário --");
                         admin.editarUsuario(scanner, usuarios);
                     } else if (escolha == 3) {
+                        System.out.println("-- Exclusão de Usuário --");
+                        admin.deletarUsuario(scanner, usuarios, usuarioLogado);
+                    } else if (escolha == 4) {
                         System.out.println("-- Cadastro de Veículos --");
                         System.out.println("1. Veículo Terrestre");
                         System.out.println("2. Veículo Aquático");
@@ -111,24 +115,68 @@ public class Main {
                         } else {
                             System.out.println("Opção inválida.");
                         }
-                    } else if (escolha == 4) {
+                    } else if (escolha == 5) {
                         System.out.println("-- Produtos Carregados --");
                         produtos = SistemaProduto.carregarProdutos();
                         for (String produto : produtos) {
                             System.out.println(produto);
                         }
-                    } else if (escolha == 5) {
-                        SistemaProduto.editarProduto(scanner, produtos);
                     } else if (escolha == 6) {
+                        SistemaProduto.editarProduto(scanner, produtos);
+                    } else if (escolha == 8) {
                         SistemaProduto.excluirProduto(scanner, produtos);
                     } else if (escolha == 0) {
                         break;
                     } else {
                         System.out.println("Opção inválida.");
                     }
-                } else {
+                } else if (usuarioLogado instanceof Funcionario funcio) {
                     System.out.println("--- MENU FUNCIONARIO ---");
-                    // Adicione as opções para funcionários aqui
+                    System.out.println("1. Cadastrar Produto");
+                    System.out.println("2. Carregar Produtos");
+                    System.out.println("3. Editar Produtos");
+                    System.out.println("4. Excluir Produtos");
+                    System.out.println("0. Sair");
+                    System.out.print("--> ");
+
+                    int escolha = Integer.parseInt(scanner.nextLine());
+
+                    if (escolha == 1) {
+                        System.out.println("-- Cadastro de Veículos --");
+                        System.out.println("1. Veículo Terrestre");
+                        System.out.println("2. Veículo Aquático");
+                        System.out.println("3. Veículo Aéreo");
+
+                        int tipoVeiculo = Integer.parseInt(scanner.nextLine());
+
+                        if (tipoVeiculo == 1) {
+                            System.out.println("Criar Veículo Terrestre (Carro)");
+                            funcio.criarNovoProduto(scanner, 1, carros, new ArrayList<>(), new ArrayList<>());
+                        } else if (tipoVeiculo == 2) {
+                            System.out.println("Criar Veículo Aquático (Embarcação)");
+                            funcio.criarNovoProduto(scanner, 2, new ArrayList<>(), new ArrayList<>(),
+                                    embarcacoes);
+                        } else if (tipoVeiculo == 3) {
+                            System.out.println("Criar Veículo Aéreo (Avião)");
+                            funcio.criarNovoProduto(scanner, 3, new ArrayList<>(), avioes, new ArrayList<>());
+                        } else {
+                            System.out.println("Opção inválida.");
+                        }
+                    } else if (escolha == 2) {
+                        System.out.println("-- Produtos Carregados --");
+                        produtos = SistemaProduto.carregarProdutos();
+                        for (String produto : produtos) {
+                            System.out.println(produto);
+                        }
+                    } else if (escolha == 3) {
+                        SistemaProduto.editarProduto(scanner, produtos);
+                    } else if (escolha == 4) {
+                        SistemaProduto.excluirProduto(scanner, produtos);
+                    } else if (escolha == 0) {
+                        break;
+                    } else {
+                        System.out.println("Opção inválida.");
+                    }
                 }
             } catch (NumberFormatException e) {
                 System.out.println("Entrada inválida! Por favor, digite um número válido.");

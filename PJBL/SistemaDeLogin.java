@@ -58,8 +58,7 @@ public class SistemaDeLogin {
         }
     }
 
-    public static void atualizarUsuario(Usuario usuario, String cpfFormatted) throws
-            LoginException {
+    public static void atualizarUsuario(Usuario usuario, String cpfFormatted) throws LoginException {
         List<String> linhas = new ArrayList<>();
 
         // Leitura do arquivo
@@ -81,14 +80,50 @@ public class SistemaDeLogin {
 
         // Escrita do arquivo
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))) {
-            for (String linha : linhas) {
-                bw.write(linha);
-                bw.newLine();
+            int size = linhas.size();
+            for (int i = 0; i < size; i++) {
+                bw.write(linhas.get(i));
+                if (i < size - 1) {
+                    bw.newLine();
+                }
             }
         } catch (IOException e) {
             throw new LoginException("Erro ao escrever arquivo: " + e.getMessage());
         }
     }
+
+
+    public static void removerUsuario(String cpfFormatted) throws LoginException {
+        List<String> linhas = new ArrayList<>();
+
+        // Leitura do arquivo
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
+            String linha;
+            while ((linha = br.readLine()) != null) {
+                Usuario usuarioLinha = Usuario.fromFileString(linha);
+                if (!usuarioLinha.getCpf().equals(cpfFormatted)) {
+                    // Adiciona as linhas que não correspondem ao usuário a ser removido
+                    linhas.add(linha);
+                }
+            }
+        } catch (IOException e) {
+            throw new LoginException("Erro ao ler arquivo: " + e.getMessage());
+        }
+
+        // Escrita do arquivo
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            int size = linhas.size();
+            for (int i = 0; i < size; i++) {
+                bw.write(linhas.get(i));
+                if (i < size - 1) {
+                    bw.newLine();
+                }
+            }
+        } catch (IOException e) {
+            throw new LoginException("Erro ao escrever arquivo: " + e.getMessage());
+        }
+    }
+
 
     // Autenticar usuário
     public static Usuario autenticar(String email, String senha, List<Usuario> usuarios) {
