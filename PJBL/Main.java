@@ -122,7 +122,7 @@ public class Main {
                         }
                     } else if (escolha == 6) {
                         SistemaProduto.editarProduto(scanner, produtos);
-                    } else if (escolha == 8) {
+                    } else if (escolha == 7) {
                         SistemaProduto.excluirProduto(scanner, produtos);
                     } else if (escolha == 0) {
                         break;

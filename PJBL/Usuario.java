@@ -12,6 +12,11 @@ public abstract class Usuario {
     private String telefone;
     private String endereco;
 
+    // Variáveis de contador para os códigos dos produtos
+    private static int proximoCodigoCarro = 1;
+    private static int proximoCodigoAviao = 1;
+    private static int proximoCodigoEmbarcacao = 1;
+
     public Usuario(int idUsuario, String nome, String tipo, String cpf, String email, String senha, String telefone,
                    String endereco) {
         this.idUsuario = idUsuario;
@@ -31,7 +36,7 @@ public abstract class Usuario {
     }
 
     // Método para criar um usuário a partir de uma linha de texto
-    //Recebe dados de um usuário delimitados por virgula
+    // Recebe dados de um usuário delimitados por vírgula
     public static Usuario fromFileString(String fileString) throws LoginException {
         // Verifica se a string de entrada é nula ou vazia
         if (fileString == null || fileString.isEmpty()) {
@@ -79,7 +84,7 @@ public abstract class Usuario {
         if (tipoVeiculo == 1) {
             System.out.println("Criar Veículo Terrestre (Carro)");
 
-            int codVeiculo = carro.size() + 1;
+            int codVeiculo = proximoCodigoCarro++;
             System.out.println("O id do carro é " + codVeiculo);
             System.out.println("--Carro--");
 
@@ -237,6 +242,19 @@ public abstract class Usuario {
                 }
             }
 
+            int numRodas = 0;
+            while (numRodas <= 0) {
+                System.out.print("Digite o número de rodas do Veículo: ");
+                try {
+                    numRodas = Integer.parseInt(scanner.nextLine());
+                    if (numRodas <= 0) {
+                        System.out.println("Número de rodas deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Número de rodas inválido. Tente novamente.");
+                }
+            }
+
             float preco = 0;
             while (preco <= 0) {
                 System.out.print("Digite o preço do Veículo: ");
@@ -263,19 +281,6 @@ public abstract class Usuario {
                 }
             }
 
-            int numRodas = 0;
-            while (numRodas <= 0) {
-                System.out.print("Digite o número de rodas do Veículo: ");
-                try {
-                    numRodas = Integer.parseInt(scanner.nextLine());
-                    if (numRodas <= 0) {
-                        System.out.println("Número de rodas deve ser maior que zero. Tente novamente.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Número de rodas inválido. Tente novamente.");
-                }
-            }
-
             Veiculo veiculo = new Carro(codVeiculo, marca, modelo, ano, quilometragem, cor,
                     capacidadeDePassageiro, preco, quantidade, numRodas, carroceria, numAssentos, portas,
                     capacidadePortaMalas, tipoMotor, potenciaMotor, tipoCombustivel, tipoCambio);
@@ -291,7 +296,7 @@ public abstract class Usuario {
         } else if (tipoVeiculo == 3) {
             System.out.println("Criar Veículo Aéreo (Avião)");
 
-            int codVeiculo = aviao.size() + 1;
+            int codVeiculo = proximoCodigoAviao++;
             System.out.println("O id do avião é " + codVeiculo);
             System.out.println("--Avião--");
 
@@ -404,6 +409,19 @@ public abstract class Usuario {
                 }
             }
 
+            int numMotores = 0;
+            while (numMotores <= 0) {
+                System.out.print("Digite o número de motores da aeronave: ");
+                try {
+                    numMotores = Integer.parseInt(scanner.nextLine());
+                    if (numMotores <= 0) {
+                        System.out.println("Número de motores deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Número de motores inválido. Tente novamente.");
+                }
+            }
+
             float preco = 0;
             while (preco <= 0) {
                 System.out.print("Digite o preço da aeronave: ");
@@ -430,19 +448,6 @@ public abstract class Usuario {
                 }
             }
 
-            int numMotores = 0;
-            while (numMotores <= 0) {
-                System.out.print("Digite o número de motores da aeronave: ");
-                try {
-                    numMotores = Integer.parseInt(scanner.nextLine());
-                    if (numMotores <= 0) {
-                        System.out.println("Número de motores deve ser maior que zero. Tente novamente.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Número de motores inválido. Tente novamente.");
-                }
-            }
-
             Veiculo veiculo = new Aviao(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor,
                     capacidadeDePassageiro, preco, quantidade, tipoPropulsao, numMotores, tipoDeAviao, alcanceDeVoo);
             aviao.add(veiculo);
@@ -455,7 +460,7 @@ public abstract class Usuario {
         } else if (tipoVeiculo == 2) {
             System.out.println("Criar Embarcação");
 
-            int codVeiculo = embarcacao.size() + 1;
+            int codVeiculo = proximoCodigoEmbarcacao++;
             System.out.println("O id da embarcação é " + codVeiculo);
             System.out.println("--Embarcação--");
 
@@ -534,6 +539,28 @@ public abstract class Usuario {
                 }
             }
 
+            String tipoPropulsao = "";
+            while (tipoPropulsao.isEmpty()) {
+                System.out.print("Digite o tipo de propulsão da embarcação: ");
+                tipoPropulsao = scanner.nextLine().trim();
+                if (tipoPropulsao.isEmpty()) {
+                    System.out.println("Tipo de propulsão da embarcação não pode ser vazio. Tente novamente.");
+                }
+            }
+
+            double alcanceNavegacao = 0;
+            while (alcanceNavegacao <= 0) {
+                System.out.print("Digite o alcance de navegação da embarcação (em km): ");
+                try {
+                    alcanceNavegacao = Double.parseDouble(scanner.nextLine());
+                    if (alcanceNavegacao <= 0) {
+                        System.out.println("Alcance de navegação da embarcação deve ser maior que zero. Tente novamente.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Alcance de navegação da embarcação inválido. Tente novamente.");
+                }
+            }
+
             double preco = 0;
             while (preco <= 0) {
                 System.out.print("Digite o preço da embarcação: ");
@@ -557,28 +584,6 @@ public abstract class Usuario {
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Quantidade de embarcações inválida. Tente novamente.");
-                }
-            }
-
-            String tipoPropulsao = "";
-            while (tipoPropulsao.isEmpty()) {
-                System.out.print("Digite o tipo de propulsão da embarcação: ");
-                tipoPropulsao = scanner.nextLine().trim();
-                if (tipoPropulsao.isEmpty()) {
-                    System.out.println("Tipo de propulsão da embarcação não pode ser vazio. Tente novamente.");
-                }
-            }
-
-            double alcanceNavegacao = 0;
-            while (alcanceNavegacao <= 0) {
-                System.out.print("Digite o alcance de navegação da embarcação (em km): ");
-                try {
-                    alcanceNavegacao = Double.parseDouble(scanner.nextLine());
-                    if (alcanceNavegacao <= 0) {
-                        System.out.println("Alcance de navegação da embarcação deve ser maior que zero. Tente novamente.");
-                    }
-                } catch (NumberFormatException e) {
-                    System.out.println("Alcance de navegação da embarcação inválido. Tente novamente.");
                 }
             }
 
