@@ -1,2 +1,2 @@
 # PjBL-5
-Final project for the 3rd semester of the OOP discipline. A phone book with Java and Swing.
+Para que o banco de dados funcione corretamente, é necessário que o projeto siga o caminho src/PJBL/
