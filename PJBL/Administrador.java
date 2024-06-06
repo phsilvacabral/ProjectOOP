@@ -9,6 +9,38 @@ public class Administrador extends Usuario {
         super(idUsuario, nome, "Administrador", cpf, email, senha, telefone, endereco);
     }
 
+    @Override
+    public void listarUsuarios(List<Usuario> usuarios) {
+        boolean temFuncionarios = false;
+        System.out.println("Administradores:");
+        for (Usuario usuario : usuarios) {
+            if (usuario.getTipo().equals("Administrador")) {
+                exibirInfo(usuario);
+                System.out.println();
+            }
+        }
+
+        System.out.println("Funcionários:");
+        for (Usuario usuario : usuarios) {
+            if (usuario.getTipo().equals("Funcionario")) {
+                exibirInfo(usuario);
+                System.out.println();
+                temFuncionarios = true;
+            }
+        }
+        if (!temFuncionarios) {
+            System.out.println("Nenhum funcionário cadastrado.");
+        }
+    }
+
+    public void exibirInfo(Usuario usuario) {
+        System.out.println("Nome: " + usuario.getNome());
+        System.out.println("CPF: " + usuario.getCpf());
+        System.out.println("Email: " + usuario.getEmail());
+        System.out.println("Telefone: " + usuario.getTelefone());
+        System.out.println("Endereço: " + usuario.getEndereco());
+    }
+
     //Método do Administrador para criar Usuario
     public void criarNovoUsuario(Scanner scanner, List<Usuario> usuarios) throws LoginException {
         // Encontrar o menor ID livre

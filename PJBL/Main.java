@@ -75,10 +75,11 @@ public class Main {
                     System.out.println("1. Criar novo usuário");
                     System.out.println("2. Editar usuário");
                     System.out.println("3. Deletar usuário");
-                    System.out.println("4. Cadastrar Produto");
-                    System.out.println("5. Carregar Produtos");
-                    System.out.println("6. Editar Produtos");
-                    System.out.println("7. Excluir Produtos");
+                    System.out.println("4. Listar usuários");
+                    System.out.println("5. Cadastrar Produto");
+                    System.out.println("6. Carregar Produtos");
+                    System.out.println("7. Editar Produtos");
+                    System.out.println("8. Excluir Produtos");
                     System.out.println("0. Sair");
                     System.out.print("--> ");
 
@@ -94,6 +95,9 @@ public class Main {
                         System.out.println("-- Exclusão de Usuário --");
                         admin.deletarUsuario(scanner, usuarios, usuarioLogado);
                     } else if (escolha == 4) {
+                        System.out.println("-- Listagem de Usuários --");
+                        admin.listarUsuarios(usuarios);
+                    } else if (escolha == 5) {
                         System.out.println("-- Cadastro de Veículos --");
                         System.out.println("1. Veículo Terrestre");
                         System.out.println("2. Veículo Aquático");
@@ -114,15 +118,15 @@ public class Main {
                         } else {
                             System.out.println("Opção inválida.");
                         }
-                    } else if (escolha == 5) {
+                    } else if (escolha == 6) {
                         System.out.println("-- Produtos Carregados --");
                         produtos = SistemaProduto.carregarProdutos();
                         for (String produto : produtos) {
                             System.out.println(produto);
                         }
-                    } else if (escolha == 6) {
-                        SistemaProduto.editarProduto(scanner, produtos);
                     } else if (escolha == 7) {
+                        SistemaProduto.editarProduto(scanner, produtos);
+                    } else if (escolha == 8) {
                         SistemaProduto.excluirProduto(scanner, produtos);
                     } else if (escolha == 0) {
                         break;
@@ -135,6 +139,7 @@ public class Main {
                     System.out.println("2. Carregar Produtos");
                     System.out.println("3. Editar Produtos");
                     System.out.println("4. Excluir Produtos");
+                    System.out.println("5. Listar Funcionarios");
                     System.out.println("0. Sair");
                     System.out.print("--> ");
 
@@ -171,6 +176,9 @@ public class Main {
                         SistemaProduto.editarProduto(scanner, produtos);
                     } else if (escolha == 4) {
                         SistemaProduto.excluirProduto(scanner, produtos);
+                    } else if (escolha == 5) {
+                        System.out.println("-- Listagem de Funcionários --");
+                        funcio.listarUsuarios(usuarios);
                     } else if (escolha == 0) {
                         break;
                     } else {

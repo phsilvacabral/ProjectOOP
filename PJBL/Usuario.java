@@ -29,6 +29,10 @@ public abstract class Usuario {
         this.endereco = endereco;
     }
 
+    public abstract void listarUsuarios(List<Usuario> usuarios);
+
+    public abstract void exibirInfo(Usuario usuario);
+
     // Método para formatar os dados do usuário como uma linha de texto separada por virgula
     public String toFileString() {
         return String.join(",", String.valueOf(idUsuario), nome, tipo, cpf, email, senha, telefone,
