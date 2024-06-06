@@ -1,11 +1,6 @@
 package PJBL;
 
-import java.io.FileWriter;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -46,11 +41,15 @@ public class SistemaProduto {
     public static void cadastrar(String produto) throws LoginException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME, true))) {
             bw.write(produto);
-            bw.newLine(); // Move the newLine() method after writing the product to avoid an empty first line
+            bw.newLine(); // Move o método newLine() após escrever o produto para evitar uma linha vazia no início
         } catch (IOException e) {
             throw new LoginException("Erro ao salvar produto: " + e.getMessage());
         }
+
+        // Atualiza os IDs dos produtos após adicionar um novo produto
+        renumerarProdutos(carregarProdutos());
     }
+
 
     public static void editarProduto(Scanner scanner, List<String> produtos) throws LoginException {
         System.out.println("-- Editar Produtos --");
@@ -101,9 +100,23 @@ public class SistemaProduto {
         if (produtoIndex >= 0 && produtoIndex < produtos.size()) {
             produtos.remove(produtoIndex);
             salvarProdutos(produtos);
+            renumerarProdutos(produtos);
             System.out.println("Produto excluído com sucesso.");
         } else {
             System.out.println("Número de produto inválido.");
+        }
+    }
+
+    private static void renumerarProdutos(List<String> produtos) throws LoginException {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILE_NAME))) {
+            for (int i = 0; i < produtos.size(); i++) {
+                String[] partes = produtos.get(i).split(",", 2); // Divide o ID do produto do restante da string
+                partes[0] = Integer.toString(i + 1); // Renomeia o ID do produto
+                bw.write(String.join(",", partes)); // Reescreve a linha com o novo ID
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            throw new LoginException("Erro ao renumerar produtos: " + e.getMessage());
         }
     }
 

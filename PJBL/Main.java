@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) throws LoginException {
         List<Usuario> usuarios = carregarUsuarios();
 
-
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
                 try {
