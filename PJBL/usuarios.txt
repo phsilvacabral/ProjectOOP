@@ -1,2 +1,3 @@
-1,Daniel Ganz Musse,Administrador,09554774923,danielganzmusse@gmail.com,danieladmin,42998194028,Rua Paulo Zilioto
-2,teste edicao,Funcionario,300.121.960-29,testeedicao@gmail.com,edicao,(42) 99977-3978,rua edicao
+1,Daniel Ganz Musse,Administrador,095.547.749-23,danielganzmusse@gmail.com,danieladmin,42998194028,Rua Paulo Zilioto
+3,mais um teste,Administrador,065.506.370-66,maisumteste@gmail.com,novoteste,(42) 99819-4028,rua novo teste
+2,testando legal,Funcionario,584.461.040-75,testandolegal@gmail.com,testando123,(42) 99987-4028,rua legal
