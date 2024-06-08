@@ -41,6 +41,33 @@ public class MenuInterface {
         });
         panel.add(createUserButton);
 
+        JButton editUserButton = new JButton("Editar usuário");
+        editUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new EditUser(usuarios);
+            }
+        });
+        panel.add(editUserButton);
+
+        JButton deleteUserButton = new JButton("Deletar usuário");
+        deleteUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new DeleteUser(usuarios);
+            }
+        });
+        panel.add(deleteUserButton);
+
+        JButton listUserButton = new JButton("Listar todos os usuários");
+        listUserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ListUser(usuarios);
+            }
+        });
+        panel.add(listUserButton);
+
         JButton registerProductButton = new JButton("Cadastrar Produto");
         registerProductButton.addActionListener(new ActionListener() {
             @Override
