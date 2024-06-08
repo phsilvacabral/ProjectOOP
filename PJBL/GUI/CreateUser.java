@@ -1,93 +1,162 @@
 package PJBL.GUI;
 
+import PJBL.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.util.List;
 
-
-public class CreateUser extends JFrame {
+public class CreateUser {
+    private JFrame frame;
     private JTextField nomeField;
     private JTextField cpfField;
     private JTextField emailField;
-    private JTextField senhaField;
+    private JPasswordField senhaField;
     private JTextField telefoneField;
     private JTextField enderecoField;
-    private JComboBox<String> tipoBox;
+    private JRadioButton adminButton;
+    private JRadioButton funcionarioButton;
     private JButton submitButton;
+    private JButton cancelButton;
     private List<Usuario> usuarios;
 
     public CreateUser(List<Usuario> usuarios) {
         this.usuarios = usuarios;
-        setTitle("Criar Novo Usuário");
-        setSize(300, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        frame = new JFrame("Criar Novo Usuário");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 600);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(8, 2));
+        frame.add(panel);
+        placeComponents(panel, usuarios);
 
-        nomeField = new JTextField();
-        cpfField = new JTextField();
-        emailField = new JTextField();
-        senhaField = new JTextField();
-        telefoneField = new JTextField();
-        enderecoField = new JTextField();
-        tipoBox = new JComboBox<>(new String[]{"A", "F"});
-        submitButton = new JButton("Submit");
+        frame.setVisible(true);
+    }
 
-        panel.add(new JLabel("Nome:"));
+    private void placeComponents(JPanel panel, List<Usuario> usuarios) {
+        panel.setLayout(new GridLayout(9, 2));
+
+        JLabel nomeLabel = new JLabel("Nome:");
+        nomeField = new JTextField(20);
+        panel.add(nomeLabel);
         panel.add(nomeField);
-        panel.add(new JLabel("CPF:"));
-        panel.add(cpfField);
-        panel.add(new JLabel("Email:"));
-        panel.add(emailField);
-        panel.add(new JLabel("Senha:"));
-        panel.add(senhaField);
-        panel.add(new JLabel("Telefone:"));
-        panel.add(telefoneField);
-        panel.add(new JLabel("Endereço:"));
-        panel.add(enderecoField);
-        panel.add(new JLabel("Tipo:"));
-        panel.add(tipoBox);
-        panel.add(submitButton);
 
+        JLabel cpfLabel = new JLabel("CPF:");
+        cpfField = new JTextField(20);
+        panel.add(cpfLabel);
+        panel.add(cpfField);
+        cpfField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                String cpf = cpfField.getText().replaceAll("\\D", "");
+                if (cpf.length() == 11) {
+                    String cpfFormatted = cpf.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
+                    cpfField.setText(cpfFormatted);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "CPF inválido. Por favor, insira um CPF com 11 dígitos.");
+                    cpfField.setText("");
+                    cpfField.requestFocus();
+                }
+            }
+        });
+
+        JLabel emailLabel = new JLabel("Email:");
+        emailField = new JTextField(20);
+        panel.add(emailLabel);
+        panel.add(emailField);
+
+        JLabel senhaLabel = new JLabel("Senha:");
+        senhaField = new JPasswordField(20);
+        panel.add(senhaLabel);
+        panel.add(senhaField);
+
+        JLabel telefoneLabel = new JLabel("Telefone:");
+        telefoneField = new JTextField(20);
+        panel.add(telefoneLabel);
+        panel.add(telefoneField);
+        telefoneField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                String telefone = telefoneField.getText().replaceAll("\\D", "");
+                if (telefone.length() == 11) {
+                    String telefoneFormatted = telefone.replaceAll("(\\d{2})(\\d{5})(\\d{4})", "($1) $2-$3");
+                    telefoneField.setText(telefoneFormatted);
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Telefone inválido. Por favor, insira um telefone com 11 dígitos.");
+                    telefoneField.setText("");
+                    telefoneField.requestFocus();
+                }
+            }
+        });
+
+        JLabel enderecoLabel = new JLabel("Endereço:");
+        enderecoField = new JTextField(20);
+        panel.add(enderecoLabel);
+        panel.add(enderecoField);
+
+        JLabel tipoLabel = new JLabel("Tipo:");
+        panel.add(tipoLabel);
+
+        JPanel radioPanel = new JPanel();
+        adminButton = new JRadioButton("Administrador");
+        funcionarioButton = new JRadioButton("Funcionario");
+        ButtonGroup group = new ButtonGroup();
+        group.add(adminButton);
+        group.add(funcionarioButton);
+        radioPanel.add(adminButton);
+        radioPanel.add(funcionarioButton);
+        panel.add(radioPanel);
+
+        submitButton = new JButton("Cadastrar");
+        submitButton.setBackground(Color.GREEN);
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String nome = nomeField.getText();
                 String cpf = cpfField.getText();
                 String email = emailField.getText();
-                String senha = senhaField.getText();
+                String senha = new String(senhaField.getPassword());
                 String telefone = telefoneField.getText();
                 String endereco = enderecoField.getText();
-                String tipo = (String) tipoBox.getSelectedItem();
+                String tipo = adminButton.isSelected() ? "Administrador" : "Funcionario";
 
-                if (!Verificador.verificarCPF(usuarios, cpf)) {
-                    JOptionPane.showMessageDialog(null, "CPF inválido!");
+                // Validação dos campos
+                if (nome.isEmpty() || cpf.isEmpty() || email.isEmpty() || senha.isEmpty() || telefone.isEmpty() || endereco.isEmpty()) {
+                    JOptionPane.showMessageDialog(frame, "Todos os campos devem ser preenchidos.", "Erro", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                if (!Verificador.verificarEmail(usuarios, email)) {
-                    JOptionPane.showMessageDialog(null, "Email inválido ou em uso!");
-                    return;
+                Usuario novoUsuario;
+                if (tipo.equals("Administrador")) {
+                    novoUsuario = new Administrador(usuarios.size() + 1, nome, cpf, email, senha, telefone, endereco);
+                } else {
+                    novoUsuario = new Funcionario(usuarios.size() + 1, nome, cpf, email, senha, telefone, endereco);
                 }
 
-                if (!Verificador.verificarTelefone(telefone)) {
-                    JOptionPane.showMessageDialog(null, "Telefone inválido!");
-                    return;
+                usuarios.add(novoUsuario);
+                try {
+                    SistemaDeLogin.salvarUsuario(novoUsuario);
+                    JOptionPane.showMessageDialog(frame, "Novo usuário criado com sucesso.");
+                    frame.dispose();
+                } catch (LoginException ex) {
+                    throw new RuntimeException(ex);
                 }
-
-                // Aqui você pode adicionar o código para criar um novo usuário e salvá-lo
-                // Por exemplo:
-                // Usuario novoUsuario = new Administrador(id, nome, cpf, email, senha, telefone, endereco);
-                // usuarios.add(novoUsuario);
-                // SistemaDeLogin.salvarUsuario(novoUsuario);
             }
         });
+        panel.add(submitButton);
 
-        add(panel);
-        setVisible(true);
+        cancelButton = new JButton("Cancelar");
+        cancelButton.setBackground(Color.RED);
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
+            }
+        });
+        panel.add(cancelButton);
     }
 }
