@@ -18,14 +18,14 @@ public class LoginScreen {
     public LoginScreen(List<Usuario> usuarios) {
         this.usuarios = usuarios;
         frame = new JFrame("Login");
-        frame.setSize(1550, 1050);
+        frame.setSize(400, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
         frame.add(panel);
         placeComponents(panel);
 
-        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        frame.setLocationRelativeTo(null);
 
         frame.setVisible(true);
     }
@@ -35,26 +35,26 @@ public class LoginScreen {
         panel.setLayout(null);
 
         JLabel userLabel = new JLabel("Email:");
-        userLabel.setBounds(10, 20, 80, 25);
+        userLabel.setBounds(10, 20, 50, 25);
         panel.add(userLabel);
 
         emailField = new JTextField(20);
-        emailField.setBounds(100, 20, 165, 25);
+        emailField.setBounds(100, 20, 270, 25);
         panel.add(emailField);
 
         JLabel passwordLabel = new JLabel("Senha:");
-        passwordLabel.setBounds(10, 50, 80, 25);
+        passwordLabel.setBounds(10, 50, 50, 25);
         panel.add(passwordLabel);
 
         passwordField = new JPasswordField(20);
-        passwordField.setBounds(100, 50, 165, 25);
+        passwordField.setBounds(100, 50, 270, 25);
         panel.add(passwordField);
 
         JButton loginButton = new JButton("Login");
-        loginButton.setBounds(10, 80, 80, 25);
+        loginButton.setBounds(30, 120, 330, 25);
         panel.add(loginButton);
 
-        loginButton.addActionListener(new ActionListener() {
+        ActionListener loginAction = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String email = emailField.getText();
@@ -63,13 +63,15 @@ public class LoginScreen {
                 Usuario usuarioLogado = SistemaDeLogin.autenticar(email, password, usuarios);
 
                 if (usuarioLogado != null) {
-                    JOptionPane.showMessageDialog(frame, "Login bem-sucedido! Bem-vindo, " + usuarioLogado.getNome() + ".");
                     frame.dispose();
                     new MenuInterface(usuarioLogado, usuarios);
                 } else {
                     JOptionPane.showMessageDialog(frame, "Email ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        });
+        };
+
+        loginButton.addActionListener(loginAction);
+        passwordField.addActionListener(loginAction);
     }
 }
