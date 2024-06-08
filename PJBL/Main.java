@@ -16,7 +16,8 @@ public class Main {
                 try {
                     System.out.println("--- BEM-VINDO ---");
                     System.out.println("1. Login");
-                    System.out.println("2. Sair");
+                    System.out.println("2. Interface");
+                    System.out.println("3. Sair");
                     System.out.print("--> ");
 
                     int opcao = Integer.parseInt(scanner.nextLine());
@@ -24,6 +25,12 @@ public class Main {
                         login(scanner, usuarios);
                         break;
                     } else if (opcao == 2) {
+                        SwingUtilities.invokeLater(new Runnable() {
+                            public void run() {
+                                new LoginScreen(usuarios);
+                            }
+                        });
+                    } else if (opcao == 3) {
                         break;
                     } else {
                         System.out.println("Opção inválida.");
