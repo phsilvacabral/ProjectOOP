@@ -23,7 +23,7 @@ public class DeleteUser {
         this.usuarioLogado = usuarioLogado;
         frame = new JFrame("Excluir Usuário");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setSize(350, 200);
 
         JPanel panel = new JPanel();
         frame.add(panel);
@@ -39,8 +39,16 @@ public class DeleteUser {
         JLabel cpfLabel = new JLabel("Digite o CPF do usuário a ser excluído:");
         cpfLabel.setBounds(10, 20, 280, 25);
         panel.add(cpfLabel);
-        cpfField = new JTextField(20);
-        cpfField.setBounds(10, 50, 160, 25);
+
+        try {
+            MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
+            cpfMask.setPlaceholderCharacter('_');
+            cpfField = new JFormattedTextField(cpfMask);
+        } catch (ParseException e) {
+            cpfField = new JTextField(20);
+        }
+        cpfField.setBounds(10, 50, 110, 25);
+
         cpfField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
@@ -49,16 +57,15 @@ public class DeleteUser {
                 cpfField.setText(cpf);
             }
         });
-
         panel.add(cpfField);
 
         deleteButton = new JButton("Excluir");
-        deleteButton.setBounds(10, 80, 80, 25);
+        deleteButton.setBounds(10, 100, 100, 25);
         deleteButton.addActionListener(e -> deleteUser());
         panel.add(deleteButton);
 
         cancelButton = new JButton("Cancelar");
-        cancelButton.setBounds(100, 80, 100, 25);
+        cancelButton.setBounds(120, 100, 100, 25);
         cancelButton.addActionListener(e -> frame.dispose());
         panel.add(cancelButton);
     }
