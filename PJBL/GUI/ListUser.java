@@ -33,14 +33,30 @@ public class ListUser {
         }
 
         table = new JTable(model);
-        JScrollPane scrollPane = new JScrollPane(table);
         table.setFillsViewportHeight(true);
 
-        frame.add(scrollPane, BorderLayout.CENTER);
+        // Increase row height
+        table.setRowHeight(25);
+
+        // Increase font size
+        Font font = table.getFont();
+        Font newFont = font.deriveFont(font.getStyle(), 15);
+        table.setFont(newFont);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        // Create a panel to hold the table and add a border to it
+        JPanel tablePanel = new JPanel(new BorderLayout());
+        tablePanel.add(scrollPane, BorderLayout.CENTER);
+        tablePanel.setBorder(BorderFactory.createEmptyBorder(20, 0, 0, 0));
+
+        frame.add(tablePanel, BorderLayout.CENTER);
 
         JButton backButton = new JButton("Voltar");
+        backButton.setBorder(BorderFactory.createEmptyBorder(20, 10, 10, 10));
+        backButton.setPreferredSize(new Dimension(100, 30));
         backButton.addActionListener(e -> frame.dispose());
-        frame.add(backButton, BorderLayout.SOUTH);
+        frame.add(backButton, BorderLayout.NORTH);
 
         frame.setVisible(true);
     }
