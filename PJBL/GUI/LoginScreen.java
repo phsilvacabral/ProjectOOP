@@ -16,6 +16,8 @@ public class LoginScreen {
     private List<Usuario> usuarios;
 
     public LoginScreen(List<Usuario> usuarios) {
+        setUIFont(new javax.swing.plaf.FontUIResource("Consolas",Font.PLAIN,12));
+
         this.usuarios = usuarios;
         frame = new JFrame("Login");
         frame.setSize(400, 200);
@@ -28,6 +30,16 @@ public class LoginScreen {
         frame.setLocationRelativeTo(null);
 
         frame.setVisible(true);
+    }
+
+    public static void setUIFont (javax.swing.plaf.FontUIResource f){
+        java.util.Enumeration<Object> keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof javax.swing.plaf.FontUIResource)
+                UIManager.put(key, f);
+        }
     }
 
     private void placeComponents(JPanel panel) {
