@@ -3,6 +3,7 @@ package PJBL.GUI;
 import PJBL.Usuario;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,6 +22,7 @@ public class MenuInterface {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel();
+        panel.setBackground(Color.decode("#1e1e1e"));
         frame.add(panel);
         placeComponents(panel);
 
@@ -30,9 +32,10 @@ public class MenuInterface {
     }
 
     private void placeComponents(JPanel panel) {
-        panel.setLayout(new GridLayout(6, 1));
+        panel.setLayout(new GridLayout(0, 3, 20, 20));
+        panel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        JButton createUserButton = new JButton("Criar novo usuário");
+        JButton createUserButton = createButton("Criar novo usuário");
         createUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -41,7 +44,7 @@ public class MenuInterface {
         });
         panel.add(createUserButton);
 
-        JButton editUserButton = new JButton("Editar usuário");
+        JButton editUserButton = createButton("Editar usuário");
         editUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -50,16 +53,16 @@ public class MenuInterface {
         });
         panel.add(editUserButton);
 
-        JButton deleteUserButton = new JButton("Deletar usuário");
+        JButton deleteUserButton = createButton("Deletar usuário");
         deleteUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new DeleteUser(usuarios);
+                new DeleteUser(usuarios, usuarioLogado);
             }
         });
         panel.add(deleteUserButton);
 
-        JButton listUserButton = new JButton("Listar todos os usuários");
+        JButton listUserButton = createButton("Listar todos os usuários");
         listUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -68,7 +71,7 @@ public class MenuInterface {
         });
         panel.add(listUserButton);
 
-        JButton registerProductButton = new JButton("Cadastrar Produto");
+        JButton registerProductButton = createButton("Cadastrar Produto");
         registerProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -77,7 +80,7 @@ public class MenuInterface {
         });
         panel.add(registerProductButton);
 
-        JButton loadProductsButton = new JButton("Carregar Produtos");
+        JButton loadProductsButton = createButton("Carregar Produtos");
         loadProductsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -86,7 +89,7 @@ public class MenuInterface {
         });
         panel.add(loadProductsButton);
 
-        JButton editProductsButton = new JButton("Editar Produtos");
+        JButton editProductsButton = createButton("Editar Produtos");
         editProductsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -95,7 +98,16 @@ public class MenuInterface {
         });
         panel.add(editProductsButton);
 
-        JButton exitButton = new JButton("Sair");
+        JButton deleteProductsButton = createButton("Excluir Produtos");
+        deleteProductsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Implementar ação para excluir produtos
+            }
+        });
+        panel.add(deleteProductsButton);
+
+        JButton exitButton = createButton("Sair");
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -103,5 +115,12 @@ public class MenuInterface {
             }
         });
         panel.add(exitButton);
+    }
+
+    private JButton createButton(String text) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Consolas", Font.PLAIN, 30));
+        button.setBackground(new Color(217, 217, 217));
+        return button;
     }
 }
