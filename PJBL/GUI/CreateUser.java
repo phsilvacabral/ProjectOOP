@@ -3,11 +3,13 @@ package PJBL.GUI;
 import PJBL.*;
 
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.text.ParseException;
 import java.util.List;
 
 public class CreateUser {
@@ -28,34 +30,52 @@ public class CreateUser {
         this.usuarios = usuarios;
         frame = new JFrame("Criar Novo Usuário");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 600);
+        frame.setSize(430, 370);
 
         JPanel panel = new JPanel();
         frame.add(panel);
         placeComponents(panel, usuarios);
 
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null);
     }
 
     private void placeComponents(JPanel panel, List<Usuario> usuarios) {
-        panel.setLayout(new GridLayout(9, 2));
+        panel.setLayout(null);
 
         JLabel nomeLabel = new JLabel("Nome:");
-        nomeField = new JTextField(20);
+        nomeLabel.setBounds(20, 20, 80, 25);
         panel.add(nomeLabel);
+        nomeField = new JTextField(20);
+        nomeField.setBounds(110, 20, 280, 25);
         panel.add(nomeField);
 
         JLabel cpfLabel = new JLabel("CPF:");
-        cpfField = new JTextField(20);
+        cpfLabel.setBounds(20, 50, 80, 25);
         panel.add(cpfLabel);
-        panel.add(cpfField);
+        try {
+            MaskFormatter cpfMask = new MaskFormatter("###.###.###-##");
+            cpfMask.setPlaceholderCharacter('_');
+            cpfField = new JFormattedTextField(cpfMask);
+            cpfField.setBounds(110, 50, 100, 25);
+            panel.add(cpfField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         cpfField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
                 String cpf = cpfField.getText().replaceAll("\\D", "");
                 if (cpf.length() == 11) {
                     String cpfFormatted = cpf.replaceAll("(\\d{3})(\\d{3})(\\d{3})(\\d{2})", "$1.$2.$3-$4");
-                    cpfField.setText(cpfFormatted);
+                    Usuario existingUser = findUserByCpf(cpfFormatted);
+                    if (existingUser != null) {
+                        JOptionPane.showMessageDialog(frame, "CPF já cadastrado. Por favor, insira um CPF diferente.");
+                        cpfField.setText("");
+                        cpfField.requestFocus();
+                    } else {
+                        cpfField.setText(cpfFormatted);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(frame, "CPF inválido. Por favor, insira um CPF com 11 dígitos.");
                     cpfField.setText("");
@@ -65,19 +85,43 @@ public class CreateUser {
         });
 
         JLabel emailLabel = new JLabel("Email:");
-        emailField = new JTextField(20);
+        emailLabel.setBounds(20, 80, 80, 25);
         panel.add(emailLabel);
+        emailField = new JTextField(20);
+        emailField.setBounds(110, 80, 280, 25);
         panel.add(emailField);
+        emailField.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                String email = emailField.getText();
+                Usuario existingUser = findUserByEmail(email);
+                if (existingUser != null) {
+                    JOptionPane.showMessageDialog(frame, "Email já cadastrado. Por favor, insira um email diferente.");
+                    emailField.setText("");
+                    emailField.requestFocus();
+                }
+            }
+        });
 
         JLabel senhaLabel = new JLabel("Senha:");
-        senhaField = new JPasswordField(20);
+        senhaLabel.setBounds(20, 110, 80, 25);
         panel.add(senhaLabel);
+        senhaField = new JPasswordField(20);
+        senhaField.setBounds(110, 110, 280, 25);
         panel.add(senhaField);
 
         JLabel telefoneLabel = new JLabel("Telefone:");
-        telefoneField = new JTextField(20);
+        telefoneLabel.setBounds(20, 140, 80, 25);
         panel.add(telefoneLabel);
-        panel.add(telefoneField);
+        try {
+            MaskFormatter telefoneMask = new MaskFormatter("(##) #####-####");
+            telefoneMask.setPlaceholderCharacter('_');
+            telefoneField = new JFormattedTextField(telefoneMask);
+            telefoneField.setBounds(110, 140, 110, 25);
+            panel.add(telefoneField);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         telefoneField.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
@@ -94,14 +138,18 @@ public class CreateUser {
         });
 
         JLabel enderecoLabel = new JLabel("Endereço:");
-        enderecoField = new JTextField(20);
+        enderecoLabel.setBounds(20, 170, 80, 25);
         panel.add(enderecoLabel);
+        enderecoField = new JTextField(20);
+        enderecoField.setBounds(110, 170, 280, 25);
         panel.add(enderecoField);
 
         JLabel tipoLabel = new JLabel("Tipo:");
+        tipoLabel.setBounds(20, 200, 80, 25);
         panel.add(tipoLabel);
 
         JPanel radioPanel = new JPanel();
+        radioPanel.setBounds(20, 200, 380, 35);
         adminButton = new JRadioButton("Administrador");
         funcionarioButton = new JRadioButton("Funcionario");
         ButtonGroup group = new ButtonGroup();
@@ -112,6 +160,7 @@ public class CreateUser {
         panel.add(radioPanel);
 
         submitButton = new JButton("Cadastrar");
+        submitButton.setBounds(20, 260, 160, 50);
         submitButton.setBackground(Color.GREEN);
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -150,6 +199,7 @@ public class CreateUser {
         panel.add(submitButton);
 
         cancelButton = new JButton("Cancelar");
+        cancelButton.setBounds(220, 260, 160, 50);
         cancelButton.setBackground(Color.RED);
         cancelButton.addActionListener(new ActionListener() {
             @Override
@@ -159,4 +209,23 @@ public class CreateUser {
         });
         panel.add(cancelButton);
     }
+
+    private Usuario findUserByCpf(String cpf) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getCpf().equals(cpf)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    private Usuario findUserByEmail(String email) {
+        for (Usuario usuario : usuarios) {
+            if (usuario.getEmail().equals(email)) {
+                return usuario;
+            }
+        }
+        return null;
+    }
 }
+
