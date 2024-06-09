@@ -1,5 +1,6 @@
 package PJBL.GUI;
 
+import PJBL.Administrador;
 import PJBL.SistemaDeLogin;
 import PJBL.Usuario;
 
@@ -75,8 +76,13 @@ public class LoginScreen {
                 Usuario usuarioLogado = SistemaDeLogin.autenticar(email, password, usuarios);
 
                 if (usuarioLogado != null) {
-                    frame.dispose();
-                    new MenuInterface(usuarioLogado, usuarios);
+                    if (usuarioLogado instanceof Administrador admin){
+                        frame.dispose();
+                        new MenuInterface(usuarioLogado, usuarios);
+                    } else {
+                        frame.dispose();
+                        new MenuInterfaceFuncio(usuarioLogado, usuarios);
+                    }
                 } else {
                     JOptionPane.showMessageDialog(frame, "Email ou senha incorretos.", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
