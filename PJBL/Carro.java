@@ -14,8 +14,7 @@ public class Carro extends Terrestre {
                  int capacidadeDePassageiro, double preco, int quantidade, int numRodas, String tipoCarroceria,
                  int numAssentos, int numPortas, int capacidadePortaMala, String motor, int potenciaMotor,
                  String combustivel, String cambio) {
-        super(codVeiculo, "Carro", marca, modelo, ano, quilometragem, cor, capacidadeDePassageiro, preco, quantidade,
-                numRodas);
+        super(codVeiculo, "Carro", marca, modelo, ano, quilometragem, cor, capacidadeDePassageiro, preco, quantidade, numRodas);
         this.tipoCarroceria = tipoCarroceria;
         this.numAssentos = numAssentos;
         this.numPortas = numPortas;
@@ -25,6 +24,8 @@ public class Carro extends Terrestre {
         this.combustivel = combustivel;
         this.cambio = cambio;
     }
+
+    // Getters and Setters
 
     public String getTipoCarroceria() {
         return tipoCarroceria;
@@ -88,5 +89,18 @@ public class Carro extends Terrestre {
 
     public void setCambio(String cambio) {
         this.cambio = cambio;
+    }
+
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Tipo de Carroceria: " + tipoCarroceria);
+        System.out.println("Número de Assentos: " + numAssentos);
+        System.out.println("Número de Portas: " + numPortas);
+        System.out.println("Capacidade do Porta-Mala: " + capacidadePortaMala);
+        System.out.println("Motor: " + motor);
+        System.out.println("Potência do Motor: " + potenciaMotor);
+        System.out.println("Combustível: " + combustivel);
+        System.out.println("Câmbio: " + cambio);
     }
 }

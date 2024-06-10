@@ -1,6 +1,6 @@
 package PJBL;
 
-public class Terrestre extends Veiculo {
+public abstract class Terrestre extends Veiculo {
     private int numRodas;
 
     public Terrestre(int codVeiculo, String tipo, String marca, String modelo, int ano, int quilometragem, String cor,
@@ -9,11 +9,19 @@ public class Terrestre extends Veiculo {
         this.numRodas = numRodas;
     }
 
+    // Getters and Setters
+
     public int getNumRodas() {
         return numRodas;
     }
 
     public void setNumRodas(int numRodas) {
         this.numRodas = numRodas;
+    }
+
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Número de Rodas: " + numRodas);
     }
 }

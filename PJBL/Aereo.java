@@ -1,6 +1,6 @@
 package PJBL;
 
-public class Aereo extends Veiculo{
+public class Aereo extends Veiculo {
     private String tipoPropulsao;
 
     public Aereo(int codVeiculo, String tipo, String marca, String modelo, int ano, int quilometragem, String cor,
@@ -15,5 +15,11 @@ public class Aereo extends Veiculo{
 
     public void setTipoPropulsao(String tipoPropulsao) {
         this.tipoPropulsao = tipoPropulsao;
+    }
+
+    @Override
+    public void displayInfo() {
+        super.displayInfo();
+        System.out.println("Tipo de Propulsão: " + tipoPropulsao);
     }
 }

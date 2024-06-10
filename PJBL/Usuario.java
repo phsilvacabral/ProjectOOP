@@ -289,6 +289,7 @@ public abstract class Usuario {
                     capacidadeDePassageiro, preco, quantidade, numRodas, carroceria, numAssentos, portas,
                     capacidadePortaMalas, tipoMotor, potenciaMotor, tipoCombustivel, tipoCambio);
             carro.add(veiculo);
+            veiculo.displayInfo();
 
             String text = String.join(",", String.valueOf(codVeiculo), "Carro", marca, modelo,
                     String.valueOf(ano), String.valueOf(quilometragem), cor, String.valueOf(capacidadeDePassageiro),
@@ -455,6 +456,7 @@ public abstract class Usuario {
             Veiculo veiculo = new Aviao(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor,
                     capacidadeDePassageiro, preco, quantidade, tipoPropulsao, numMotores, tipoDeAviao, alcanceDeVoo);
             aviao.add(veiculo);
+            veiculo.displayInfo();
 
             String text = String.join(",", String.valueOf(codVeiculo), "Avião", marca, modelo,
                     String.valueOf(ano), String.valueOf(quilometragem), cor, String.valueOf(capacidadeDePassageiro),
@@ -594,6 +596,7 @@ public abstract class Usuario {
             Veiculo veiculo = new Embarcacao(codVeiculo, tipo, marca, modelo, ano, quilometragem, cor,
                     capacidadeDePassageiro, preco, quantidade, tipoPropulsao, alcanceNavegacao);
             embarcacao.add(veiculo);
+            veiculo.displayInfo();
 
             String text = String.join(",", String.valueOf(codVeiculo), "Embarcação", marca, modelo,
                     String.valueOf(ano), String.valueOf(quilometragem), cor, String.valueOf(capacidadeDePassageiro),
