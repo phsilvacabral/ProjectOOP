@@ -113,14 +113,11 @@ public class Main {
                         int tipoVeiculo = Integer.parseInt(scanner.nextLine());
 
                         if (tipoVeiculo == 1) {
-                            System.out.println("Criar Veículo Terrestre (Carro)");
                             admin.criarNovoProduto(scanner, 1, carros, new ArrayList<>(), new ArrayList<>());
                         } else if (tipoVeiculo == 2) {
-                            System.out.println("Criar Veículo Aquático (Embarcação)");
                             admin.criarNovoProduto(scanner, 2, new ArrayList<>(), new ArrayList<>(),
                                     embarcacoes);
                         } else if (tipoVeiculo == 3) {
-                            System.out.println("Criar Veículo Aéreo (Avião)");
                             admin.criarNovoProduto(scanner, 3, new ArrayList<>(), avioes, new ArrayList<>());
                         } else {
                             System.out.println("Opção inválida.");
@@ -161,14 +158,11 @@ public class Main {
                         int tipoVeiculo = Integer.parseInt(scanner.nextLine());
 
                         if (tipoVeiculo == 1) {
-                            System.out.println("Criar Veículo Terrestre (Carro)");
                             funcio.criarNovoProduto(scanner, 1, carros, new ArrayList<>(), new ArrayList<>());
                         } else if (tipoVeiculo == 2) {
-                            System.out.println("Criar Veículo Aquático (Embarcação)");
                             funcio.criarNovoProduto(scanner, 2, new ArrayList<>(), new ArrayList<>(),
                                     embarcacoes);
                         } else if (tipoVeiculo == 3) {
-                            System.out.println("Criar Veículo Aéreo (Avião)");
                             funcio.criarNovoProduto(scanner, 3, new ArrayList<>(), avioes, new ArrayList<>());
                         } else {
                             System.out.println("Opção inválida.");
