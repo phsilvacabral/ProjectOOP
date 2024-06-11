@@ -31,7 +31,7 @@ public class EditUser {
     public EditUser(List<Usuario> usuarios) {
         this.usuarios = usuarios;
         frame = new JFrame("Editar Usuário");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(430, 630);
 
         JPanel panel = new JPanel();
@@ -172,7 +172,7 @@ public class EditUser {
 
         submitButton = new JButton("Atualizar");
         submitButton.setBounds(20, 530, 170, 50);
-        submitButton.setBackground(Color.GREEN);
+        submitButton.setBackground(new Color(0, 222, 110));
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -210,7 +210,7 @@ public class EditUser {
 
         cancelButton = new JButton("Cancelar");
         cancelButton.setBounds(220, 530, 170, 50);
-        cancelButton.setBackground(Color.RED);
+        cancelButton.setBackground(new Color(255, 99, 99));
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
