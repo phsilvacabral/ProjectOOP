@@ -13,6 +13,7 @@ import static PJBL.SistemaDeLogin.carregarUsuarios;
 public class Main {
     public static void main(String[] args) throws LoginException {
         List<Usuario> usuarios = carregarUsuarios();
+        List<String> produtos = SistemaProduto.carregarProdutos();
 
         try (Scanner scanner = new Scanner(System.in)) {
             while (true) {
@@ -30,7 +31,7 @@ public class Main {
                     } else if (opcao == 2) {
                         SwingUtilities.invokeLater(new Runnable() {
                             public void run() {
-                                new LoginScreen(usuarios);
+                                new LoginScreen(usuarios, produtos);
                             }
                         });
                     } else if (opcao == 3) {
