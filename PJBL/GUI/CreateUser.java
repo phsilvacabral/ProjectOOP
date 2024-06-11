@@ -29,7 +29,7 @@ public class CreateUser {
     public CreateUser(List<Usuario> usuarios) {
         this.usuarios = usuarios;
         frame = new JFrame("Criar Novo Usuário");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(430, 370);
 
         JPanel panel = new JPanel();
@@ -161,7 +161,7 @@ public class CreateUser {
 
         submitButton = new JButton("Cadastrar");
         submitButton.setBounds(20, 260, 160, 50);
-        submitButton.setBackground(Color.GREEN);
+        submitButton.setBackground(new Color(0, 222, 110));
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -200,7 +200,7 @@ public class CreateUser {
 
         cancelButton = new JButton("Cancelar");
         cancelButton.setBounds(220, 260, 160, 50);
-        cancelButton.setBackground(Color.RED);
+        cancelButton.setBackground(new Color(255, 99, 99));
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
