@@ -5,6 +5,7 @@ import PJBL.SistemaDeLogin;
 
 import javax.swing.text.MaskFormatter;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.text.ParseException;
@@ -22,7 +23,7 @@ public class DeleteUser {
         this.usuarios = usuarios;
         this.usuarioLogado = usuarioLogado;
         frame = new JFrame("Excluir Usuário");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(350, 200);
 
         JPanel panel = new JPanel();
@@ -60,12 +61,13 @@ public class DeleteUser {
         panel.add(cpfField);
 
         deleteButton = new JButton("Excluir");
-        deleteButton.setBounds(10, 100, 100, 25);
+        deleteButton.setBounds(140, 100, 120, 30);
+        deleteButton.setBackground(new Color(255, 99, 99));
         deleteButton.addActionListener(e -> deleteUser());
         panel.add(deleteButton);
 
         cancelButton = new JButton("Cancelar");
-        cancelButton.setBounds(120, 100, 100, 25);
+        cancelButton.setBounds(10, 100, 120, 30);
         cancelButton.addActionListener(e -> frame.dispose());
         panel.add(cancelButton);
     }
