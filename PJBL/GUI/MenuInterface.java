@@ -1,6 +1,7 @@
 package PJBL.GUI;
 
 import PJBL.Usuario;
+import PJBL.Veiculo;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,10 +14,12 @@ public class MenuInterface {
     private JFrame frame;
     private Usuario usuarioLogado;
     private List<Usuario> usuarios;
+    private List<String> produtos;
 
-    public MenuInterface(Usuario usuarioLogado, List<Usuario> usuarios) {
+    public MenuInterface(Usuario usuarioLogado, List<Usuario> usuarios, List<String> produtos) {
         this.usuarioLogado = usuarioLogado;
         this.usuarios = usuarios;
+        this.produtos = produtos;
 
         frame = new JFrame("Menu");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -36,6 +39,7 @@ public class MenuInterface {
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         JButton createUserButton = createButton("Criar novo usuário");
+        createUserButton.setBackground(new Color(201, 207, 228));
         createUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -45,6 +49,7 @@ public class MenuInterface {
         panel.add(createUserButton);
 
         JButton editUserButton = createButton("Editar usuário");
+        editUserButton.setBackground(new Color(201, 207, 228));
         editUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -54,6 +59,7 @@ public class MenuInterface {
         panel.add(editUserButton);
 
         JButton deleteUserButton = createButton("Deletar usuário");
+        deleteUserButton.setBackground(new Color(201, 207, 228));
         deleteUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -63,6 +69,7 @@ public class MenuInterface {
         panel.add(deleteUserButton);
 
         JButton listUserButton = createButton("Listar todos os usuários");
+        listUserButton.setBackground(new Color(201, 207, 228));
         listUserButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -72,46 +79,52 @@ public class MenuInterface {
         panel.add(listUserButton);
 
         JButton registerProductButton = createButton("Cadastrar Produto");
+        registerProductButton.setBackground(new Color(192, 232, 186));
         registerProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar ação para cadastrar produto
+                CreateProduto createProduto = new CreateProduto();
+                createProduto.setVisible(true);
             }
         });
         panel.add(registerProductButton);
 
         JButton loadProductsButton = createButton("Carregar Produtos");
+        loadProductsButton.setBackground(new Color(192, 232, 186));
         loadProductsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar ação para carregar produtos
+                new ListProduto();
             }
         });
         panel.add(loadProductsButton);
 
         JButton editProductsButton = createButton("Editar Produtos");
+        editProductsButton.setBackground(new Color(192, 232, 186));
         editProductsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar ação para editar produtos
+                new EditProduto();
             }
         });
         panel.add(editProductsButton);
 
         JButton deleteProductsButton = createButton("Excluir Produtos");
+        deleteProductsButton.setBackground(new Color(192, 232, 186));
         deleteProductsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar ação para excluir produtos
+                new DeleteProduto();
             }
         });
         panel.add(deleteProductsButton);
 
         JButton exitButton = createButton("Sair");
+        exitButton.setBackground(new Color(236, 203, 203));
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                System.exit(0);
             }
         });
         panel.add(exitButton);
