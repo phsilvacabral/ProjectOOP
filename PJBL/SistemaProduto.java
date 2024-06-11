@@ -137,49 +137,4 @@ public class SistemaProduto {
             throw new LoginException("Erro ao salvar produtos: " + e.getMessage());
         }
     }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        try {
-            List<String> produtos = carregarProdutos();
-
-            while (true) {
-                System.out.println("\n-- Sistema de Produtos --");
-                System.out.println("1. Listar produtos");
-                System.out.println("2. Cadastrar produto");
-                System.out.println("3. Editar produto");
-                System.out.println("4. Excluir produto");
-                System.out.println("5. Sair");
-                System.out.print("Escolha uma opção: ");
-                int opcao = Integer.parseInt(scanner.nextLine());
-
-                switch (opcao) {
-                    case 1:
-                        listarProdutos(produtos);
-                        break;
-                    case 2:
-                        System.out.println("Digite o nome e o preço do produto (separados por vírgula):");
-                        String produto = scanner.nextLine();
-                        cadastrar(produto);
-                        produtos = carregarProdutos(); // Recarrega a lista de produtos após cadastrar
-                        break;
-                    case 3:
-                        editarProduto(scanner, produtos);
-                        break;
-                    case 4:
-                        excluirProduto(scanner, produtos);
-                        break;
-                    case 5:
-                        System.out.println("Saindo do sistema...");
-                        return;
-                    default:
-                        System.out.println("Opção inválida.");
-                }
-            }
-        } catch (LoginException e) {
-            System.out.println("Erro: " + e.getMessage());
-        } finally {
-            scanner.close();
-        }
-    }
 }
