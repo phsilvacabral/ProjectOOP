@@ -15,14 +15,17 @@ public class LoginScreen {
     private JTextField emailField;
     private JPasswordField passwordField;
     private List<Usuario> usuarios;
+    private List<String> produtos;
 
-    public LoginScreen(List<Usuario> usuarios) {
+    public LoginScreen(List<Usuario> usuarios, List<String> produtos) {
         setUIFont(new javax.swing.plaf.FontUIResource("Consolas",Font.PLAIN,12));
 
         this.usuarios = usuarios;
+        this.produtos = produtos;
+
         frame = new JFrame("Login");
         frame.setSize(400, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel panel = new JPanel();
         frame.add(panel);
@@ -78,7 +81,7 @@ public class LoginScreen {
                 if (usuarioLogado != null) {
                     if (usuarioLogado instanceof Administrador admin){
                         frame.dispose();
-                        new MenuInterface(usuarioLogado, usuarios);
+                        new MenuInterface(usuarioLogado, usuarios, produtos);
                     } else {
                         frame.dispose();
                         new MenuInterfaceFuncio(usuarioLogado, usuarios);
