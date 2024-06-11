@@ -1,6 +1,6 @@
 package PJBL;
 
-public abstract class Terrestre extends Veiculo {
+public class Terrestre extends Veiculo {
     private int numRodas;
 
     public Terrestre(int codVeiculo, String tipo, String marca, String modelo, int ano, int quilometragem, String cor,
