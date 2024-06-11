@@ -36,46 +36,52 @@ public class MenuInterfaceFuncio {
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
         JButton registerProductButton = createButton("Cadastrar Produto");
+        registerProductButton.setBackground(new Color(192, 232, 186));
         registerProductButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar ação para cadastrar produto
+                CreateProduto createProduto = new CreateProduto();
+                createProduto.setVisible(true);
             }
         });
         panel.add(registerProductButton);
 
         JButton loadProductsButton = createButton("Carregar Produtos");
+        loadProductsButton.setBackground(new Color(192, 232, 186));
         loadProductsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar ação para carregar produtos
+                new ListProduto();
             }
         });
         panel.add(loadProductsButton);
 
         JButton editProductsButton = createButton("Editar Produtos");
+        editProductsButton.setBackground(new Color(192, 232, 186));
         editProductsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar ação para editar produtos
+                new EditProduto();
             }
         });
         panel.add(editProductsButton);
 
         JButton deleteProductsButton = createButton("Excluir Produtos");
+        deleteProductsButton.setBackground(new Color(192, 232, 186));
         deleteProductsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Implementar ação para excluir produtos
+                new DeleteProduto();
             }
         });
         panel.add(deleteProductsButton);
 
         JButton exitButton = createButton("Sair");
+        exitButton.setBackground(new Color(236, 203, 203));
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                System.exit(0);
             }
         });
         panel.add(exitButton);
