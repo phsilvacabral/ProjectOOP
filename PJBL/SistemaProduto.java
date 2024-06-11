@@ -60,19 +60,19 @@ public class SistemaProduto {
 
         if (produtoIndex >= 0 && produtoIndex < produtos.size()) {
             System.out.println("Selecione o que deseja editar:");
-            System.out.println("1. Editar Nome");
+            System.out.println("1. Editar Quantidade");
             System.out.println("2. Editar Preço");
             int escolha = Integer.parseInt(scanner.nextLine());
 
             if (escolha == 1) {
-                System.out.println("Digite o novo nome para o produto:");
-                String novoNomeProduto = scanner.nextLine();
+                System.out.println("Digite a nova quantidade para o produto:");
+                int novaQuantidadeProduto = Integer.parseInt(scanner.nextLine());
                 String produto = produtos.get(produtoIndex);
                 String[] partes = produto.split(",");
-                partes[0] = novoNomeProduto;
+                partes[2] = Integer.toString(novaQuantidadeProduto);
                 produtos.set(produtoIndex, String.join(",", partes));
                 salvarProdutos(produtos);
-                System.out.println("Nome do produto editado com sucesso.");
+                System.out.println("Quantidade do produto editada com sucesso.");
             } else if (escolha == 2) {
                 System.out.println("Digite o novo preço para o produto:");
                 double novoPrecoProduto = Double.parseDouble(scanner.nextLine());
