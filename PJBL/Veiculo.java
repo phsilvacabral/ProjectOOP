@@ -26,6 +26,8 @@ public abstract class Veiculo {
         this.quantidade = quantidade;
     }
 
+    // Getters and Setters
+
     public int getCodVeiculo() {
         return codVeiculo;
     }
@@ -104,5 +106,19 @@ public abstract class Veiculo {
 
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public void displayInfo() {
+        System.out.println("--Veículo a seguir foi cadastrado--");
+        System.out.println("Código do Veículo: " + codVeiculo);
+        System.out.println("Tipo: " + tipo);
+        System.out.println("Marca: " + marca);
+        System.out.println("Modelo: " + modelo);
+        System.out.println("Ano: " + ano);
+        System.out.println("Quilometragem: " + quilometragem);
+        System.out.println("Cor: " + cor);
+        System.out.println("Capacidade de Passageiro: " + capacidadeDePassageiro);
+        System.out.println("Preço: " + preco);
+        System.out.println("Quantidade: " + quantidade);
     }
 }
