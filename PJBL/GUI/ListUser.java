@@ -15,7 +15,7 @@ public class ListUser {
     public ListUser(List<Usuario> usuarios) {
         this.usuarios = usuarios;
         frame = new JFrame("Listar Usuários");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         String[] columnNames = {"Nome", "CPF", "Email", "Telefone", "Endereço", "Tipo"};
