@@ -25,23 +25,35 @@ public class ListProduto {
     public ListProduto() {
         try {
             this.produtos = carregarProdutos();
-            for (String produto : produtos) {
-                String[] partes = produto.split(",");
-                switch (partes[1]) {
-                    case "Carro":
-                        terrestres.add(produto);
-                        break;
-                    case "Embarcação":
-                        aquaticos.add(produto);
-                        break;
-                    case "Avião":
-                        aereos.add(produto);
-                        break;
+            if (produtos.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Não há nenhum produto cadastrado.");
+                return; // Não continue se não houver produtos
+            } else {
+                for (String produto : produtos) {
+                    String[] partes = produto.split(",");
+                    if (partes.length > 1) {
+                        switch (partes[1]) {
+                            case "Carro":
+                                terrestres.add(produto);
+                                break;
+                            case "Embarcação":
+                                aquaticos.add(produto);
+                                break;
+                            case "Avião":
+                                aereos.add(produto);
+                                break;
+                            default:
+                                System.out.println("Tipo desconhecido: " + partes[1]);
+                                break;
+                        }
+                    }
                 }
             }
         } catch (LoginException e) {
             JOptionPane.showMessageDialog(null, "Erro ao carregar produtos: " + e.getMessage());
+            return; // Não continue se houver um erro ao carregar os produtos
         }
+
         frame = new JFrame("Listar Produtos");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -65,16 +77,20 @@ public class ListProduto {
     }
 
     private void createTable(String tipo, List<String> produtosTipo) {
+        if (produtosTipo.isEmpty()) {
+            return;
+        }
+
         // Verifica o número de campos em um produto
         int numCampos = produtosTipo.get(0).split(",").length;
 
         // Cria os nomes das colunas com base no número de campos
         String[] columnNames = new String[numCampos];
-        if (tipo.equals("Terrestres")){
+        if (tipo.equals("Terrestres")) {
             columnNames = new String[]{"id", "Tipo", "Marca", "Modelo", "Ano", "P. Motor", "Cor", "Cap. Passageiros", "Preço", "Estoque", "Nº rodas", "Carroceria", "Assentos", "N° portas", "Cap. Porta-malas", "Tipo motor", "P. Motor", "Combustível", "Câmbio"};
-        } else if (tipo.equals("Aquáticos")){
+        } else if (tipo.equals("Aquáticos")) {
             columnNames = new String[]{"id", "Tipo", "Marca", "Modelo", "Ano", "Km navegados", "Cor", "Cap. Passageiros", "Preço", "Estoque", "Propulsão"};
-        } else if (tipo.equals("Aéreos")){
+        } else if (tipo.equals("Aéreos")) {
             columnNames = new String[]{"id", "Tipo", "Marca", "Modelo", "Ano", "Km rodados", "Cor", "Passageiros", "Preço", "Estoque", "N° motores"};
         }
 
@@ -82,7 +98,7 @@ public class ListProduto {
 
         for (String produto : produtosTipo) {
             String[] partes = produto.split(",");
-            if (partes.length > 2) {
+            if (partes.length > 1) {
                 Object[] o = new Object[partes.length];
                 for (int i = 0; i < partes.length; i++) {
                     o[i] = partes[i];
@@ -90,7 +106,6 @@ public class ListProduto {
                 model.addRow(o);
             }
         }
-
 
         JTable table = new JTable(model);
         table.setFillsViewportHeight(true);
@@ -112,7 +127,6 @@ public class ListProduto {
 
         tabbedPane.addTab(tipo, tablePanel);
     }
-
 
     public static List<String> carregarProdutos() throws LoginException {
         List<String> produtos = new ArrayList<>();
