@@ -20,8 +20,9 @@ Para usar o sistema, siga estas etapas:
 2. Escolha se quer execultar pelo terminal ou pela interface gráfica.
 ![image](https://github.com/phsilvacabral/PjBL-5/assets/126737207/2cf84331-5dcc-422a-a315-995127d1b18d)
 4. Faça login.
-5. No menu principal, escolha a função desejada.![image](https://github.com/phsilvacabral/PjBL-5/assets/126737207/51d9ec31-aa1f-47cc-8d8a-de7ae8064666)
-6. Preencha os campos necessários e clique em "Cadastrar", "Editar" ou "Excluir", conforme apropriado.
+![image](https://github.com/phsilvacabral/PjBL-5/assets/126737207/3bdce48d-f71d-4ba4-93f5-1770afe60e03)
+6. No menu principal, escolha a função desejada.![image](https://github.com/phsilvacabral/PjBL-5/assets/126737207/51d9ec31-aa1f-47cc-8d8a-de7ae8064666)
+7. Preencha os campos necessários e clique em "Cadastrar", "Editar" ou "Excluir", conforme apropriado.
 ![image](https://github.com/phsilvacabral/PjBL-5/assets/126737207/f26d75b8-70ef-4b19-826b-24b33485ddac)
 
 
