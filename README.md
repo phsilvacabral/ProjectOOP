@@ -18,7 +18,7 @@ Para usar o sistema, siga estas etapas:
 
 1. Inicie o programa.
 2. Escolha se quer execultar pelo terminal ou pela interface gráfica.
-![image](https://github.com/phsilvacabral/PjBL-5/assets/126737207/bb509aa7-15bc-4cb2-bfda-040de44d401a)
+![image](https://github.com/phsilvacabral/PjBL-5/assets/126737207/2cf84331-5dcc-422a-a315-995127d1b18d)
 4. Faça login.
 5. No menu principal, escolha a função desejada.![image](https://github.com/phsilvacabral/PjBL-5/assets/126737207/51d9ec31-aa1f-47cc-8d8a-de7ae8064666)
 6. Preencha os campos necessários e clique em "Cadastrar", "Editar" ou "Excluir", conforme apropriado.
