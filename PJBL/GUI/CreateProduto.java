@@ -175,6 +175,16 @@ public class CreateProduto extends JFrame {
                     return;
                 }
             }
+
+            if (!anoField.getText().matches("\\d+") || !quilometragemField.getText().matches("\\d+") ||
+                    !capacidadeDePassageiroField.getText().matches("\\d+") || !precoField.getText().matches("\\d+") ||
+                    !quantidadeField.getText().matches("\\d+") || !numRodasField.getText().matches("\\d+") ||
+                    !numAssentosField.getText().matches("\\d+") || !numPortasField.getText().matches("\\d+") ||
+                    !capacidadePortaMalasField.getText().matches("\\d+") || !potenciaMotorField.getText().matches("\\d+")) {
+                JOptionPane.showMessageDialog(this, "Por favor, insira apenas números nos campos apropriados.", "Erro", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             int codVeiculo = 0;
             String marca = marcaField.getText();
             String modelo = modeloField.getText();
@@ -310,6 +320,16 @@ public class CreateProduto extends JFrame {
                     return;
                 }
             }
+
+            // Campos que devem conter apenas números
+            JTextField[] numericFields = {anoAeronaveField, quilometragemAeronaveField, alcanceVooField, capacidadePassageirosField, numMotoresField, quantidadeAeronaveField};
+            for (JTextField field : numericFields) {
+                if (!field.getText().matches("\\d+")) {
+                    JOptionPane.showMessageDialog(this, "Por favor, insira apenas números nos campos de ano, quilometragem, alcance de voo, capacidade de passageiros, número de motores e quantidade.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
             int codVeiculo = 0;
             String tipo = tipoAeronaveField.getText();
             String marca = marcaAeronaveField.getText();
@@ -428,6 +448,18 @@ public class CreateProduto extends JFrame {
                     return;
                 }
             }
+
+            // Campos que devem conter apenas números
+            JTextField[] numericFields = {anoEmbarcacaoField, quilometragemEmbarcacaoField, capacidadePassageirosField, alcanceNavegacaoField, quantidadeEmbarcacaoField};
+
+            for (JTextField field : numericFields) {
+                if (!field.getText().matches("\\d+")) {
+                    JOptionPane.showMessageDialog(this, "Por favor, insira apenas números nos campos de ano, quilometragem, capacidade de passageiros, alcance de navegação e quantidade.", "Erro", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+
             int codVeiculo = 0;
             String tipo = tipoEmbarcacaoField.getText();
             String marca = marcaEmbarcacaoField.getText();
